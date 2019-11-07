@@ -11,12 +11,17 @@ describe('ActivatorService', () => {
   describe('validateAddressIdKeyPair', () => {
     it('Should sucessfully validate pair', () => {
       try {
-        service.validateAddressKeyPair('wrong Id', TestPublicKey)
+        service.validateAddressKeyPair(TestAccountId, TestPublicKey)
       } catch (e) {
         expect('No error expected').toBeFalsy()
       }
+    }),
+    it('Should throw error for invalid pair', () => {
+      try {
+        service.validateAddressKeyPair('wrong Id', TestPublicKey)
+      } catch (e) {
+        expect('No error expected').toBeTruthy()
+      }
     })
   })
-
-
 });
