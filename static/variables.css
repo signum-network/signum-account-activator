@@ -1,0 +1,10 @@
+:root {
+    --dim-footer-height: 50px;
+    --dim-small-gap: 0.25rem;
+}
+
+@media (max-width: 400px ) {
+    :root {
+        --dim-footer-height: 30px;
+    }
+}

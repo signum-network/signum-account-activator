@@ -5,31 +5,23 @@
         margin: 0;
     }
 
-    :root {
-        --footer-height: 50px;
-        --small-gap: 0.25rem;
-    }
-
-    @media (max-width: 768px ){
-        :root {
-            --footer-height: 30px;
-        }
-        small {
-            font-size: .5em;
-        }
-    }
-
     .wrapper {
         overflow-y: auto;
     }
 
     footer {
         width: 100%;
-        height: var(--footer-height);
+        height: var(--dim-footer-height);
         text-align: end;
         border-top: 1px darkgrey solid;
-        padding: var(--small-gap);
+        padding: var(--dim-small-gap);
 
+    }
+
+    @media (max-width: 400px) {
+        small {
+            font-size: .5em;
+        }
     }
 
     .footer-content {
@@ -44,11 +36,11 @@
     }
 
     img {
-        height: var(--footer-height);
+        height: var(--dim-footer-height);
     }
 
     .small-img {
-        height: calc(var(--footer-height) / 2);
+        height: calc(var(--dim-footer-height) / 2);
     }
 
     main {
@@ -58,7 +50,7 @@
         padding: 2em;
         margin: 0 auto;
         box-sizing: border-box;
-        height: calc(100vh - var(--footer-height) - var(--small-gap) * 2);
+        height: calc(100vh - var(--dim-footer-height) - var(--dim-small-gap) * 2);
     }
 </style>
 
@@ -69,7 +61,7 @@
 </div>
 <footer class="has-background-white">
     <div class="footer-content">
-        <div class="svelte-heart"}>
+        <div class="svelte-heart" }>
             <small>Built with ❤️ and</small>
             <a href="https://svelte.dev" target="_blank">
                 <img class="small-img" src="svelte.svg" alt="Svelte Logo">

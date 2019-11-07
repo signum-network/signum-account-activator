@@ -4,9 +4,10 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "sapper dev",
-    "build": "sapper export",
+    "build": "npm run test && sapper export",
     "compile": "sapper build",
-    "start": "node __sapper__/build"
+    "start": "node __sapper__/build",
+    "test": "jest"
   },
   "dependencies": {
     "@burstjs/core": "file:burstjs-core-0.4.0.tgz",
@@ -21,8 +22,14 @@
     "@babel/preset-env": "^7.7.1",
     "babel-jest": "^24.9.0",
     "css-loader": "^3.2.0",
+    "eslint": "^6.6.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-svelte3": "^2.7.3",
     "jest": "^24.9.0",
     "npm-run-all": "^4.1.5",
+    "prettier": "^1.18.2",
     "sapper": "^0.27.0",
     "style-loader": "^1.0.0",
     "svelte": "^3.0.0",

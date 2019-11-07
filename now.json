@@ -1,7 +1,7 @@
 {
   "build": {
     "env": {
-      "BURST_NODE":"http://testnet.getburst.net:6876"
+      "BURST_NODE": "http://testnet.getburst.net:6876"
     }
   }
 }
