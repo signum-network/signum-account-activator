@@ -1,0 +1,6 @@
+.idea
+.vscode
+/__sapper__/
+/**/node_modules/
+/static/
+
