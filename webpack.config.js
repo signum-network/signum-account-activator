@@ -6,14 +6,15 @@ const pkg = require('./package.json');
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
 
-console.log(mode)
-
 const alias = {svelte: path.resolve('node_modules', 'svelte')};
 const extensions = ['.mjs', '.js', '.json', '.svelte', '.html'];
 const mainFields = ['svelte', 'module', 'browser', 'main'];
 
 module.exports = {
   client: {
+    node: {
+      fs: "empty"
+    },
     entry: config.client.entry(),
     output: config.client.output(),
     resolve: {alias, extensions, mainFields},

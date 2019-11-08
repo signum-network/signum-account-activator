@@ -4,7 +4,8 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "sapper dev",
-    "build": "npm run test && sapper export",
+    "export": "sapper export",
+    "build": "sapper build",
     "compile": "sapper build",
     "start": "node __sapper__/build",
     "test": "jest",
@@ -12,11 +13,13 @@
     "deploy:production": "now --local-config=now.production.json"
   },
   "dependencies": {
-    "@burstjs/core": "file:burstjs-core-0.4.1.tgz",
+    "@burstjs/core": "^0.4.2",
     "body-parser": "latest",
     "bulma": "^0.8.0",
     "compression": "^1.7.1",
     "dotenv": "^8.2.0",
+    "now-sapper": "^0.35.0",
+    "pino": "^5.13.6",
     "polka": "next",
     "sirv": "^0.4.0"
   },
