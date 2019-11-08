@@ -7,16 +7,18 @@
     "build": "npm run test && sapper export",
     "compile": "sapper build",
     "start": "node __sapper__/build",
-    "test": "jest"
+    "test": "jest",
+    "deploy:staging": "now --local-config=now.staging.json",
+    "deploy:production": "now --local-config=now.production.json"
   },
   "dependencies": {
-    "@burstjs/core": "^0.4.1",
+    "@burstjs/core": "file:burstjs-core-0.4.1.tgz",
+    "body-parser": "latest",
     "bulma": "^0.8.0",
     "compression": "^1.7.1",
     "dotenv": "^8.2.0",
     "polka": "next",
-    "sirv": "^0.4.0",
-    "body-parser": "latest"
+    "sirv": "^0.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.7.2",

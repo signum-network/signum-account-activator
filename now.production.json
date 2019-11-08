@@ -1,0 +1,9 @@
+{
+  "name": "burst-account-activator",
+  "build": {
+    "env": {
+      "BURST_NODE": "http://testnet.getburst.net:6876",
+      "ACTIVATOR_ACCOUNT_SECRET": "@activator-account-mainnet"
+    }
+  }
+}
