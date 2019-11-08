@@ -43,7 +43,7 @@ export class ActivatorService {
     }
 
     async __sendWelcomeMessage(accountId, publicKey){
-        const {signPrivateKey, publicKey : senderPublicKey} = generateMasterKeys(process.env.ACTIVATOR_ACCOUNT_SECRET)
+        const {signPrivateKey, publicKey : senderPublicKey} = generateMasterKeys(config.accountSecret)
         await this.burstApi.message.sendMessage({
             message: WelcomeMessage,
             recipientId: accountId,
