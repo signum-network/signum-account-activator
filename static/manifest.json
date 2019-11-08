@@ -1,18 +1,18 @@
 {
   "background_color": "#ffffff",
   "theme_color": "#333333",
-  "name": "TODO",
-  "short_name": "TODO",
+  "name": "Burst Account Activator",
+  "short_name": "Burst Activator",
   "display": "minimal-ui",
   "start_url": "/",
   "icons": [
     {
-      "src": "logo-192.png",
+      "src": "burst-logo-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "logo-512.png",
+      "src": "burst-logo-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }

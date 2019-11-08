@@ -1,6 +1,7 @@
 :root {
     --dim-footer-height: 50px;
     --dim-small-gap: 0.25rem;
+    --dim-gap: 0.5rem;
 }
 
 @media (max-width: 400px ) {
