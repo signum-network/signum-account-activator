@@ -10,12 +10,13 @@
     "test": "jest"
   },
   "dependencies": {
-    "@burstjs/core": "file:burstjs-core-0.4.0.tgz",
+    "@burstjs/core": "^0.4.1",
     "bulma": "^0.8.0",
     "compression": "^1.7.1",
     "dotenv": "^8.2.0",
     "polka": "next",
-    "sirv": "^0.4.0"
+    "sirv": "^0.4.0",
+    "body-parser": "latest"
   },
   "devDependencies": {
     "@babel/core": "^7.7.2",

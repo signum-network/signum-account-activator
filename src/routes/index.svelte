@@ -1,3 +1,62 @@
+<script context="module">
+    export async function preload(page, session) {
+        const { account, publickey } = page.query
+        return { account, publickey }
+    }
+</script>
+
+<script>
+    import { fly, slide, fade, crossfade } from 'svelte/transition'
+    // import { activatorService } from '../services/ActivatorService'
+    import {HttpImpl as Http} from '@burstjs/http'
+
+    export let account
+    export let publickey
+
+    const ActivationState = {
+        New: 0,
+        Activated: 1,
+        Failed: 2,
+    }
+
+    const http = new Http('/api')
+    const InitialTitle = 'Activate your account'
+
+    let error = null
+    let isLoading = false
+    let activationState = ActivationState.New
+    let title = InitialTitle
+    $: canActivate = !isLoading && account && publickey
+
+    const reset = () => {
+        account = null
+        publickey = null
+        error = null
+    }
+
+    const activate = async () => {
+        try {
+            isLoading = true
+            await http.post('/activate', {account, publickey})
+            activationState = ActivationState.Activated
+            title = 'Successfully activated'
+            reset()
+        } catch (e) {
+            activationState = ActivationState.Failed
+            title = 'Oh, snap. This did not work. Try again'
+            error = e.data
+        } finally {
+            isLoading = false
+        }
+    }
+
+    const closeError = () => {
+        title = InitialTitle
+        reset()
+    }
+
+</script>
+
 <style>
     h1, figure {
         text-align: center;
@@ -8,10 +67,25 @@
         margin: 0 0 1em 0;
     }
 
-    img {
+    .is-600px-width {
         width: 100%;
         max-width: 600px;
         margin: 0 0 1em 0;
+    }
+
+    .is-256px-height {
+        height: 100%;
+        max-height: 256px;
+    }
+
+    .buttons {
+        padding-top: var(--dim-gap);
+        display: flex;
+        justify-content: center;
+    }
+
+    .success {
+        text-align: center;
     }
 
 </style>
@@ -24,27 +98,56 @@
 <section class="hero">
     <div class="hero-body">
         <div class="container">
-            <figure>
-                <img alt='Burst' src='sticker-burst-1.svg'>
-            </figure>
+            <a href="https://www.burst-coin.org/" target="_blank">
+                <figure>
+                    <img class="is-600px-width" alt='Burst' src='sticker-burst-1.svg'>
+                </figure>
+            </a>
             <h1 class="subtitle is-uppercase is-size-2-tablet is-size-4-mobile">
-                Activate your account
+                {title}
             </h1>
         </div>
     </div>
 </section>
 
-<div>
-    <div class="field">
-        <label class="label">Account Address or Id</label>
-        <div class="control">
-            <input class="input is-large" type="text" placeholder="Enter Account Address or Id"/>
+<section class="form">
+    {#if activationState === ActivationState.Activated}
+        <div transition:fade class="success">
+            <figure>
+                <img class="is-256px-height" src="success.png" alt="Success"/>
+            </figure>
+            <small>
+                A welcome message was sent to your account. You'll receive it in a few moments.
+            </small>
         </div>
-    </div>
-    <div class="field">
-        <label class="label">Public Key</label>
-        <div class="control">
-            <input class="input is-large" type="text" placeholder="Enter Public Key"/>
+    {:else }
+        <div>
+            <div class="field">
+                <label class="label">Account Address or Id</label>
+                <div class="control">
+                    <input class="input is-large" type="text" placeholder="Enter Account Address or Id"
+                           bind:value={account}/>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Public Key</label>
+                <div class="control">
+                    <input class="input is-large" type="text" placeholder="Enter Public Key" bind:value={publickey}/>
+                </div>
+            </div>
+            {#if error}
+                <div in:fade="{{duration: 500}}" class="notification is-danger">
+                    <button class="delete" on:click={closeError}></button>
+                    <small>{error}</small>
+                </div>
+            {:else}
+                <div class="buttons">
+                    <button class={`button is-primary is-large ${isLoading ? 'is-loading' : ''}`}
+                            on:click={async () => await activate()}
+                            disabled={!canActivate}>Activate
+                    </button>
+                </div>
+            {/if}
         </div>
-    </div>
-</div>
+    {/if}
+</section>
