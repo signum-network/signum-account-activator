@@ -10,7 +10,7 @@ export const post = async (req, res) => {
 
     if (account && publickey) {
         try {
-            await activatorService.validate(account, publickey)
+            await activatorService.activate(account, publickey)
             res.statusCode = 200
             res.end()
         } catch (e) {
