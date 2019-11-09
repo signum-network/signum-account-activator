@@ -1,21 +1,15 @@
 <script>
-    import { onDestroy } from 'svelte'
+    let donationAccount = 'BURST-9K9L-4CB5-88Y5-F5G4Z'
+    let hasCopied = false
+    const copyAddress = () => {
+        navigator.clipboard.writeText(donationAccount)
+        hasCopied = true
+    }
 
-    export let status
-    export let error
+    const returnHome = () => {
+        location.replace('/')
+    }
 
-    const dev = process.env.NODE_ENV === 'development'
-
-    let timeToRedirect = 5
-    const interval = setInterval(() => {
-        if (--timeToRedirect === 0) {
-            location.replace('/')
-        }
-    }, 1000)
-
-    onDestroy(() => {
-        clearInterval(interval)
-    })
 </script>
 
 <style>
@@ -47,6 +41,10 @@
         margin: 0 0 1em 0;
     }
 
+    img {
+        max-height: 180px;
+    }
+
     @media (max-width: 400px ) {
         .content img {
             width: 112px;
@@ -67,22 +65,22 @@
                     <img class="is-600px-width" alt='Burst' src='sticker-burst-1.svg'>
                 </figure>
             </a>
-            <h1 class="subtitle is-uppercase is-size-2-tablet is-size-4-mobile center-text">
-                This is not page you're looking for
-            </h1>
-            <small class="">{timeToRedirect ? `Redirecting in ${timeToRedirect} seconds...` : 'Bye'}</small>
+            <h2 class="subtitle is-uppercase is-size-2-tablet is-size-4-mobile center-text">
+                Buy me a beer 🍻
+            </h2>
         </div>
     </div>
 </section>
 
 <section class="content center-text">
     <figure>
-        <img src="c3po.png" alt="Success"/>
+        <img src="ohager_bat.png" alt="Burst Apps Team Member ohager">
     </figure>
-    <small>
-        {error.message}
-    </small>
-    {#if dev && error.stack}
-        <pre>{error.stack}</pre>
-    {/if}
+    <h3>
+        <a href="burst.payment://v1?action=send&payload=e3JlY2lwaWVudElkOjE2MTA3NjIwMDI2Nzk2OTgzNTM4O2Ftb3VudDoxMDB9">
+            {donationAccount}</a>
+    </h3>
+    <button class={`button is-small ${hasCopied && 'is-success'}`}
+            on:click={copyAddress}>{ hasCopied ? 'Address Copied': 'Copy Address'}</button>
+    <button class="button is-small" on:click={returnHome}>Back</button>
 </section>

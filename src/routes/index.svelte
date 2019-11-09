@@ -6,8 +6,7 @@
 </script>
 
 <script>
-    import { fly, slide, fade, crossfade } from 'svelte/transition'
-    // import { activatorService } from '../services/ActivatorService'
+    import { fade } from 'svelte/transition'
     import {HttpImpl as Http} from '@burstjs/http'
 
     export let account
@@ -67,12 +66,6 @@
         margin: 0 0 1em 0;
     }
 
-    .is-600px-width {
-        width: 100%;
-        max-width: 600px;
-        margin: 0 0 1em 0;
-    }
-
     .is-256px-height {
         height: 100%;
         max-height: 256px;
@@ -98,7 +91,7 @@
 <section class="hero">
     <div class="hero-body">
         <div class="container">
-            <a href="https://www.burst-coin.org/" target="_blank">
+            <a href="https://www.burst-coin.org/" target="_blank" rel="noopener">
                 <figure>
                     <img class="is-600px-width" alt='Burst' src='sticker-burst-1.svg'>
                 </figure>
