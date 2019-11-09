@@ -27,6 +27,11 @@
 
     }
 
+    .donation{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
     @media (max-width: 400px) {
         small {
             font-size: .5em;
@@ -39,12 +44,16 @@
     <div class="footer-content">
         <div class="svelte-heart">
             <small>Built with ❤️ and</small>
-            <a href="https://svelte.dev" target="_blank">
+            <a href="https://svelte.dev" target="_blank" rel="noopener">
                 <img class="small-img" src="svelte.svg" alt="Svelte Logo">
             </a>
         </div>
-
-        <a href="https://burst-apps-team.github.io/phoenix" target="_blank">
+        <div class="donation">
+            <small>
+                <a href="/buymeabeer">Buy me a beer 🍺<a>
+            </small>
+        </div>
+        <a href="https://burst-apps-team.github.io/phoenix" target="_blank" rel="noopener">
             <img src="burst-js.svg" alt="BurstJS Logo"/>
         </a>
     </div>
