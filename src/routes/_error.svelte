@@ -68,7 +68,7 @@
                 </figure>
             </a>
             <h1 class="subtitle is-uppercase is-size-2-tablet is-size-4-mobile center-text">
-                This is not page you're looking for
+                This is not the page you're looking for
             </h1>
             <small class="">{timeToRedirect ? `Redirecting in ${timeToRedirect} seconds...` : 'Bye'}</small>
         </div>
