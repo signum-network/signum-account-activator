@@ -1,5 +1,13 @@
 {
   "name": "burst-account-activator",
+  "author": {
+    "email": "ohager@burst-alliance.org",
+    "name": "Oliver Hager"
+  },
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/ohager/burst-account-activator"
+  },
   "description": "Tiny service to easily activate a Burst Account",
   "version": "0.0.1",
   "scripts": {

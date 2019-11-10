@@ -1,9 +1,10 @@
-import { getAccountIdFromPublicKey, generateMasterKeys } from '@burstjs/crypto'
-import { convertAddressToNumericId, isBurstAddress, convertNumberToNQTString } from '@burstjs/util'
+import { generateMasterKeys, getAccountIdFromPublicKey } from '@burstjs/crypto'
+import { convertAddressToNumericId, isBurstAddress } from '@burstjs/util'
 import { ApiSettings, composeApi } from '@burstjs/core'
 import { config } from '../../../config'
 
-const WelcomeMessage = "Welcome to the Burst Network. The truly decentralized, public, and environment friendly blockchain platform"
+const WelcomeMessage = 'Welcome to the Burst Network. The truly decentralized, public, and environment friendly blockchain platform'
+
 
 export class ActivatorService {
 
@@ -11,7 +12,7 @@ export class ActivatorService {
         this.burstApi = composeApi(new ApiSettings(config.burstNodeHost))
     }
 
-    __ensureAccountId(account){
+    __ensureAccountId(account) {
         return isBurstAddress(account) ? convertAddressToNumericId(account) : account
     }
 
@@ -22,11 +23,27 @@ export class ActivatorService {
         }
     }
 
+    __getSenderCredentials() {
+        const keys = generateMasterKeys(config.accountSecret)
+        return {
+            id: getAccountIdFromPublicKey(keys.publicKey),
+            ...keys,
+        }
+    }
+
     async __validateAccount(accountId) {
         try {
             const { publicKey } = await this.burstApi.account.getAccount(accountId)
             if (publicKey) {
                 throw new Error('The account is already active')
+            }
+
+            const { id: senderId } = this.__getSenderCredentials()
+            const { unconfirmedTransactions } = await this.burstApi.account.getUnconfirmedAccountTransactions(accountId, false)
+
+            console.log('__validateAccount', unconfirmedTransactions)
+            if (unconfirmedTransactions.some(({ sender }) => sender === senderId)) {
+                throw new Error('Activation is pending')
             }
         } catch (e) {
             if (!e.data) {
@@ -42,23 +59,25 @@ export class ActivatorService {
         }
     }
 
-    async __sendWelcomeMessage(accountId, publicKey){
-        const {signPrivateKey, publicKey : senderPublicKey} = generateMasterKeys(config.accountSecret)
-        await this.burstApi.message.sendMessage({
+    async __sendWelcomeMessage(accountId, publicKey) {
+        let { signPrivateKey, publicKey: senderPublicKey } = this.__getSenderCredentials()
+        let suggestedFees = await this.burstApi.network.suggestFee()
+        const sendMessageArgs = {
             message: WelcomeMessage,
             recipientId: accountId,
             recipientPublicKey: publicKey,
-            feePlanck: convertNumberToNQTString(0.05),
+            feePlanck: suggestedFees.standard + '',
             senderPrivateKey: signPrivateKey,
             senderPublicKey: senderPublicKey,
-        })
+        }
+        const { transaction } = await this.burstApi.message.sendMessage(sendMessageArgs)
     }
 
     async activate(account, publicKey) {
         const accountId = this.__ensureAccountId(account)
         this.__validateAddressKeyPair(accountId, publicKey)
         await this.__validateAccount(accountId)
-        await this.__sendWelcomeMessage(accountId)
+        await this.__sendWelcomeMessage(accountId, publicKey)
     }
 
 }
