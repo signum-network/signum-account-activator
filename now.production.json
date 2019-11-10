@@ -1,9 +1,15 @@
 {
+  "version": 2,
   "name": "burst-account-activator",
-  "build": {
-    "env": {
-      "BURST_NODE": "http://testnet.getburst.net:6876",
-      "ACTIVATOR_ACCOUNT_SECRET": "@activator-account-mainnet"
+  "env": {
+    "BURST_NODE": "http://testnet.getburst.net:6876",
+    "ACTIVATOR_ACCOUNT_SECRET": "@activator-account-testnet",
+    "TEST_NET":"false"
+  },
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "now-sapper"
     }
-  }
+  ]
 }

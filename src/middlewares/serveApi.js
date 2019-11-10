@@ -13,7 +13,6 @@ const limiter = rateLimit(
 )
 
 export const serveApi = () => (req, res, next) => {
-    console.log(req.path)
     if (isApiRequest(req)) {
         res.setHeader('Content-Type', 'application/json')
         limiter(req, res, next)

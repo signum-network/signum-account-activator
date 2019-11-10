@@ -1,16 +1,18 @@
 <script context="module">
     export async function preload(page, session) {
         const { account, publickey } = page.query
-        return { account, publickey }
+        return { account, publickey, isTestnet: process.env.TEST_NET === 'true' }
     }
 </script>
 
 <script>
     import { fade } from 'svelte/transition'
-    import {HttpImpl as Http} from '@burstjs/http'
+    import { HttpImpl as Http } from '@burstjs/http'
+    import Stamp from '../components/Stamp.svelte'
 
     export let account
     export let publickey
+    export let isTestnet
 
     const ActivationState = {
         New: 0,
@@ -36,7 +38,7 @@
     const activate = async () => {
         try {
             isLoading = true
-            await http.post('/activate', {account, publickey})
+            await http.post('/activate', { account, publickey })
             activationState = ActivationState.Activated
             title = 'Successfully activated'
             reset()
@@ -81,6 +83,12 @@
         text-align: center;
     }
 
+    .stamp-wrapper {
+        position: absolute;
+        top: -3em;
+        left: -2em;
+    }
+
 </style>
 
 <svelte:head>
@@ -91,6 +99,11 @@
 <section class="hero">
     <div class="hero-body">
         <div class="container">
+            {#if isTestnet}
+                <div class='stamp-wrapper'>
+                    <Stamp text='Testnet'></Stamp>
+                </div>
+            {/if}
             <a href="https://www.burst-coin.org/" target="_blank" rel="noopener">
                 <figure>
                     <img class="is-600px-width" alt='Burst' src='sticker-burst-1.svg'>
