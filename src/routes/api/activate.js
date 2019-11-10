@@ -1,8 +1,4 @@
-import { config } from '../../config'
-import { ApiSettings, composeApi } from '@burstjs/core'
 import { activatorService } from './__services__/ActivatorService'
-
-const api = composeApi(new ApiSettings(config.burstNodeHost))
 
 export const post = async (req, res) => {
 

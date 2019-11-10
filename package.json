@@ -26,6 +26,7 @@
     "bulma": "^0.8.0",
     "compression": "^1.7.1",
     "dotenv": "^8.2.0",
+    "express-rate-limit": "^5.0.0",
     "now-sapper": "^0.35.0",
     "pino": "^5.13.6",
     "polka": "next",
