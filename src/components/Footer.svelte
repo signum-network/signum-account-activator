@@ -50,7 +50,7 @@
         </div>
         <div class="donation">
             <small>
-                <a href="/buymeabeer">Buy me a beer 🍺<a>
+                <a href="/buymeabeer">Buy me a beer </a>
             </small>
         </div>
         <a href="https://burst-apps-team.github.io/phoenix" target="_blank" rel="noopener">
