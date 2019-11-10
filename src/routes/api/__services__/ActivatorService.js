@@ -31,25 +31,27 @@ export class ActivatorService {
         }
     }
 
+    async __validatePendingActivation(recipientId) {
+        const { id: senderId } = this.__getSenderCredentials()
+        const { unconfirmedTransactions } = await this.burstApi.account.getUnconfirmedAccountTransactions(
+            senderId,
+            false,
+        )
+        if (unconfirmedTransactions.some(({ recipient }) => recipient === recipientId)) {
+            throw new Error('Activation is pending')
+        }
+    }
+
     async __validateAccount(accountId) {
         try {
             const { publicKey } = await this.burstApi.account.getAccount(accountId)
             if (publicKey) {
                 throw new Error('The account is already active')
             }
-
-            const { id: senderId } = this.__getSenderCredentials()
-            const { unconfirmedTransactions } = await this.burstApi.account.getUnconfirmedAccountTransactions(accountId, false)
-
-            console.log('__validateAccount', unconfirmedTransactions)
-            if (unconfirmedTransactions.some(({ sender }) => sender === senderId)) {
-                throw new Error('Activation is pending')
-            }
         } catch (e) {
             if (!e.data) {
                 throw e
             }
-
             const { errorDescription } = e.data
             if (errorDescription === 'Unknown account') {
                 // ok, ignore this
@@ -77,6 +79,7 @@ export class ActivatorService {
         const accountId = this.__ensureAccountId(account)
         this.__validateAddressKeyPair(accountId, publicKey)
         await this.__validateAccount(accountId)
+        await this.__validatePendingActivation(accountId)
         await this.__sendWelcomeMessage(accountId, publicKey)
     }
 
