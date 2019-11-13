@@ -25,6 +25,7 @@
     "body-parser": "latest",
     "bulma": "^0.8.0",
     "compression": "^1.7.1",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express-rate-limit": "^5.0.0",
     "now-sapper": "^0.35.0",
