@@ -1,0 +1,93 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Burstcoin Account Activator API",
+    "version": "1.0.0",
+    "contact": {
+      "email": "ohager@burst-alliance.org"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "paths": {
+    "/status": {
+      "get": {
+        "operationId": "status",
+        "summary": "Status/Health check",
+        "responses": {
+          "200": {
+            "description": "200 response"
+          },
+          "429": {
+            "description": "Exceeds rate limit"
+          }
+        }
+      }
+    },
+    "/info": {
+      "get": {
+        "operationId": "info",
+        "summary": "This description (OpenAPI 3.0)",
+        "responses": {
+          "200": {
+            "description": "200 response"
+          },
+          "429": {
+            "description": "Exceeds rate limit"
+          }
+        }
+      }
+    },
+    "/activate": {
+      "post": {
+        "summary": "Activates an account",
+        "description": "Sends a message to given account. The activation needs a few moments, usually a block time (240 sec)",
+        "operationId": "activate",
+        "requestBody": {
+          "description": "Account to be activated",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Account"
+              },
+              "example": {
+                "account": "BURST-K37B-9V85-FB95-793HN",
+                "publickey": "7210b8941929030324540238450e985899989a7ad0267e0c76f668fde3b1016b"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successfully requested account activation, i.e. an activation message was sent"
+          },
+          "429": {
+            "description": "Exceeds rate limit"
+          },
+          "400": {
+            "description": "Account maybe activated already, or account activation is pending"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Account": {
+        "type": "object",
+        "properties": {
+          "account": {
+            "type": "string",
+            "description": "Account Id or RS Address"
+          },
+          "publickey": {
+            "type": "string",
+            "description": "The public key in hexadecimal format"
+          }
+        }
+      }
+    }
+  }
+}

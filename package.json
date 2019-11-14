@@ -4,12 +4,13 @@
     "email": "ohager@burst-alliance.org",
     "name": "Oliver Hager"
   },
+  "license": "Apache 2.0",
   "repository": {
     "type": "github",
     "url": "https://github.com/ohager/burst-account-activator"
   },
   "description": "Tiny service to easily activate a Burst Account",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "scripts": {
     "dev": "sapper dev",
     "export": "sapper export",

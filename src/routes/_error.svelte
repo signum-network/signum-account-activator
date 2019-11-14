@@ -43,6 +43,10 @@
         margin: 0 0 1em 0;
     }
 
+    .content img {
+        max-height: 256px;
+    }
+
     @media (max-width: 400px ) {
         .content img {
             width: 112px;
@@ -66,7 +70,10 @@
             <h1 class="subtitle is-uppercase is-size-2-tablet is-size-4-mobile center-text">
                 This is not the page you're looking for
             </h1>
-            <small class="">{timeToRedirect ? `Redirecting in ${timeToRedirect} seconds...` : 'Bye'}</small>
+            <a href="/api/info">Open API Description</a>
+            <div>
+                <small>{timeToRedirect ? `Redirecting in ${timeToRedirect} seconds...` : 'Bye'}</small>
+            </div>
         </div>
     </div>
 </section>
@@ -75,9 +82,6 @@
     <figure>
         <img src="c3po.png" alt="Success"/>
     </figure>
-    <small>
-        {error.message}
-    </small>
     {#if dev && error.stack}
         <pre>{error.stack}</pre>
     {/if}
