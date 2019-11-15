@@ -19,7 +19,7 @@
     "start": "node __sapper__/build",
     "test": "jest",
     "deploy:staging": "now --local-config=now.staging.json",
-    "deploy:production": "now --local-config=now.production.json"
+    "deploy:production": "now --local-config=now.production.json --prod"
   },
   "dependencies": {
     "@burstjs/core": "^0.4.2",
