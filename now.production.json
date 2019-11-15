@@ -2,8 +2,8 @@
   "version": 2,
   "name": "burst-account-activator",
   "env": {
-    "BURST_NODE": "http://testnet.getburst.net:6876",
-    "ACTIVATOR_ACCOUNT_SECRET": "@activator-account-testnet",
+    "BURST_NODE": "https://wallet.burst-alliance.org:8125",
+    "ACTIVATOR_ACCOUNT_SECRET": "@activator-account-mainnet",
     "TEST_NET":"false"
   },
   "builds": [
@@ -13,3 +13,4 @@
     }
   ]
 }
+
