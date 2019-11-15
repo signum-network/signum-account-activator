@@ -57,8 +57,9 @@
         <img src="ohager_bat.png" alt="Burst Apps Team Member ohager">
     </figure>
     <h3>
-        <a href="burst.payment://v1?action=send&payload=e3JlY2lwaWVudElkOjE2MTA3NjIwMDI2Nzk2OTgzNTM4O2Ftb3VudDoxMDB9">
-            {donationAccount}</a>
+<!--        <a href="burst.payment://v1?action=send&payload=e3JlY2lwaWVudElkOjE2MTA3NjIwMDI2Nzk2OTgzNTM4O2Ftb3VudDoxMDB9">-->
+<!--            {donationAccount}</a>-->
+        <a href={`burst://requestBurst?receiver=${donationAccount}`}>{donationAccount}</a>
     </h3>
     <button class={`button is-small ${hasCopied && 'is-success'}`}
             on:click={copyAddress}>{ hasCopied ? 'Address Copied': 'Copy Address'}</button>
