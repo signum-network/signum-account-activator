@@ -12,7 +12,7 @@
     }
   },
   "paths": {
-    "/status": {
+    "/api/status": {
       "get": {
         "operationId": "status",
         "summary": "Status/Health check",
@@ -26,7 +26,7 @@
         }
       }
     },
-    "/info": {
+    "/api/info": {
       "get": {
         "operationId": "info",
         "summary": "This description (OpenAPI 3.0)",
@@ -40,7 +40,7 @@
         }
       }
     },
-    "/activate": {
+    "/api/activate": {
       "post": {
         "summary": "Activates an account",
         "description": "Sends a message to given account. The activation needs a few moments, usually a block time (240 sec)",
