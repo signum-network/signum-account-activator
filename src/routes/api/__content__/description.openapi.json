@@ -19,9 +19,6 @@
         "responses": {
           "200": {
             "description": "200 response"
-          },
-          "429": {
-            "description": "Exceeds rate limit"
           }
         }
       }
@@ -32,10 +29,7 @@
         "summary": "This description (OpenAPI 3.0)",
         "responses": {
           "200": {
-            "description": "200 response"
-          },
-          "429": {
-            "description": "Exceeds rate limit"
+            "description": "The OpenAPI V3 description of this API"
           }
         }
       }
@@ -64,10 +58,30 @@
             "description": "Successfully requested account activation, i.e. an activation message was sent"
           },
           "429": {
-            "description": "Exceeds rate limit"
+            "description": "Exceeds rate limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/ErrorMessage"
+                  }
+                }
+              }
+            }
           },
           "400": {
-            "description": "Account maybe activated already, or account activation is pending"
+            "description": "Account maybe activated already, or account activation is pending",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/ErrorMessage"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -85,6 +99,15 @@
           "publickey": {
             "type": "string",
             "description": "The public key in hexadecimal format"
+          }
+        }
+      },
+      "ErrorMessage": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "The message"
           }
         }
       }

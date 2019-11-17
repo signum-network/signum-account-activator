@@ -1,4 +1,5 @@
 import { activatorService } from './__services__/ActivatorService'
+import { messageResponse } from './__helpers__/messageResponse'
 
 export const post = async (req, res) => {
 
@@ -11,11 +12,11 @@ export const post = async (req, res) => {
             res.end()
         } catch (e) {
             res.statusCode = 400
-            res.end(e.message)
+            res.end(messageResponse(e.message))
         }
     } else {
         res.statusCode = 400
-        res.end('Missing fields [account] and/or [publickey]')
+        res.end(messageResponse('Missing fields [account] and/or [publickey]'))
     }
 
 

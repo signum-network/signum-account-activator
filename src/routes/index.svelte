@@ -35,6 +35,8 @@
         error = null
     }
 
+    const getErrorMessage = e => (e.data && e.data.message) || e.message || 'An unknown Error occurred'
+
     const activate = async () => {
         try {
             isLoading = true
@@ -45,7 +47,7 @@
         } catch (e) {
             activationState = ActivationState.Failed
             title = 'Oh, snap. This did not work. Try again'
-            error = e.data
+            error = getErrorMessage(e)
         } finally {
             isLoading = false
         }
