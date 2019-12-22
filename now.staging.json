@@ -4,7 +4,8 @@
   "env": {
     "BURST_NODE": "http://testnet.getburst.net:6876",
     "ACTIVATOR_ACCOUNT_SECRET": "@activator-account-testnet",
-    "TEST_NET": "true"
+    "TEST_NET": "true",
+    "ACTIVATION_AMOUNT": "100"
   },
   "builds": [
     {

@@ -1,6 +1,6 @@
 import { generateMasterKeys, getAccountIdFromPublicKey } from '@burstjs/crypto'
-import { convertAddressToNumericId, isBurstAddress } from '@burstjs/util'
-import { ApiSettings, composeApi } from '@burstjs/core'
+import { convertAddressToNumericId, convertNumberToNQTString, isBurstAddress } from '@burstjs/util'
+import { ApiSettings, AttachmentMessage, composeApi } from '@burstjs/core'
 import { config } from '../../../config'
 
 const WelcomeMessage = 'Welcome to the Burst Network. The truly decentralized, public, and environment friendly blockchain platform'
@@ -72,7 +72,28 @@ export class ActivatorService {
             senderPrivateKey: signPrivateKey,
             senderPublicKey: senderPublicKey,
         }
-        const { transaction } = await this.burstApi.message.sendMessage(sendMessageArgs)
+        await this.burstApi.message.sendMessage(sendMessageArgs)
+    }
+
+    async __sendWelcomeMessageWithAmount(accountId, publicKey, amountPlanck) {
+        let { signPrivateKey, publicKey: senderPublicKey } = this.__getSenderCredentials()
+        let suggestedFees = await this.burstApi.network.suggestFee()
+
+        const attachment = new AttachmentMessage({
+            messageIsText: true,
+            message: WelcomeMessage,
+        })
+
+        const args = {
+            amountPlanck,
+            attachment,
+            feePlanck: suggestedFees.standard + '',
+            recipientId: accountId,
+            recipientPublicKey: publicKey,
+            senderPrivateKey: signPrivateKey,
+            senderPublicKey: senderPublicKey,
+        }
+        await this.burstApi.transaction.sendAmountToSingleRecipient(args)
     }
 
     async activate(account, publicKey) {
@@ -80,7 +101,12 @@ export class ActivatorService {
         this.__validateAddressKeyPair(accountId, publicKey)
         await this.__validateAccount(accountId)
         await this.__validatePendingActivation(accountId)
-        await this.__sendWelcomeMessage(accountId, publicKey)
+        if (config.activationAmount === 0) {
+            await this.__sendWelcomeMessage(accountId, publicKey)
+        } else {
+            const amountPlanck = convertNumberToNQTString(config.activationAmount)
+            await this.__sendWelcomeMessageWithAmount(accountId, publicKey, amountPlanck)
+        }
     }
 
 }
