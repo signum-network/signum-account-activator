@@ -4,7 +4,8 @@
   "env": {
     "BURST_NODE": "https://wallet.burst-alliance.org:8125",
     "ACTIVATOR_ACCOUNT_SECRET": "@activator-account-mainnet",
-    "TEST_NET":"false"
+    "TEST_NET":"false",
+    "ACTIVATION_AMOUNT": "0"
   },
   "builds": [
     {
