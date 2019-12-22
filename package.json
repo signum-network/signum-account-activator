@@ -18,7 +18,7 @@
     "compile": "sapper build",
     "start": "node __sapper__/build",
     "test": "jest",
-    "deploy:staging": "now --local-config=now.staging.json",
+    "deploy:staging": "now --local-config=now.staging.json --prod",
     "deploy:production": "now --local-config=now.production.json --prod"
   },
   "dependencies": {
