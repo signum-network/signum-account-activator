@@ -1,7 +1,5 @@
 <script>
     import Footer from '../components/Footer.svelte'
-
-    export let segment
 </script>
 
 <style>

@@ -5,7 +5,8 @@
     "BURST_NODE": "http://testnet.getburst.net:6876",
     "ACTIVATOR_ACCOUNT_SECRET": "@activator-account-testnet",
     "TEST_NET": "true",
-    "ACTIVATION_AMOUNT": "100"
+    "ACTIVATION_AMOUNT": "100",
+    "WEB_UI": "true"
   },
   "builds": [
     {

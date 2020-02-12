@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "name": "burst-account-activator",
+  "name": "pinbox-account-activator",
   "env": {
     "BURST_NODE": "https://wallet.burst-alliance.org:8125",
-    "ACTIVATOR_ACCOUNT_SECRET": "@activator-account-mainnet",
+    "ACTIVATOR_ACCOUNT_SECRET": "@activator-account-pinbox",
     "TEST_NET":"false",
-    "ACTIVATION_AMOUNT": "0",
-    "WEB_UI": "true"
+    "ACTIVATION_AMOUNT": "0.1",
+    "WEB_UI": "false"
   },
   "builds": [
     {
