@@ -9,3 +9,4 @@ yarn-error.log
 .env
 *.log
 .now
+.env
