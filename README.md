@@ -1,10 +1,18 @@
 ![Uptime Robot ratio (30 days)](https://img.shields.io/uptimerobot/ratio/m784377894-299d79c7d5c34fed26b22169?label=Uptime%20Mainnet)
 ![Uptime Robot ratio (30 days)](https://img.shields.io/uptimerobot/ratio/m784377904-89a3979b61551238a7d96b5d?label=Uptime%20Testnet)
 
+# Online
+
+## Main Net - Production
+
 [Mainnet Activator UI](https://burst-account-activator.now.sh/)
+
 [Mainnet Activator Web Service API](https://petstore.swagger.io/?url=https://burst-account-activator.now.sh/api/info)
 
+## Test Net - Development
+
 [Testnet Activator UI](https://burst-account-activator-testnet.now.sh/)
+
 [Testnet Activator Web Service API](https://petstore.swagger.io/?url=https://burst-account-activator-testnet.now.sh/api/info)
 
 # Burst Account Activator
