@@ -8,3 +8,4 @@ yarn-error.log
 .idea
 .env
 *.log
+.now
