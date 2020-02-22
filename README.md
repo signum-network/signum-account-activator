@@ -39,7 +39,7 @@ Keep in mind, that you never ever should send your passphrase over the wire, i.e
 > The Phoenix wallet activates your account automatically on creation, but also offers the option to activate imported accounts 
 
 Nowadays, you don't have many options to get your public key. If you have some basic programming skills you could use a simple script to get your public key using [burstjs](https://burstappsteam.org/phoenix/modules/crypto.html#generatemasterkeys).
-Another "impatient" way is to use an online example, like (repl.it)[https://repl.it/@ohager/BurstJS-Playground], but you are vulnerable to man-in-the-middle attacks
+Another "impatient" way is to use an online example, like [repl.it](https://repl.it/@ohager/BurstJS-Playground), but you are vulnerable to man-in-the-middle attacks
   
 The following code, shows how to get the public key (some basic experience with NodeJS is required)  
 ```javascript
