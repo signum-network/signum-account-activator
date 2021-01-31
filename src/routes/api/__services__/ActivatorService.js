@@ -5,11 +5,13 @@ import { config } from '../../../config'
 
 const WelcomeMessage = 'Welcome to the Burst Network. The truly decentralized, public, and environment friendly blockchain platform'
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = config.isTestnet ? '0' : '1'
 
 export class ActivatorService {
 
     constructor() {
         this.burstApi = composeApi(new ApiSettings(config.burstNodeHost))
+        console.log('host:', config.burstNodeHost)
     }
 
     __ensureAccountId(account) {
@@ -44,6 +46,7 @@ export class ActivatorService {
 
     async __validateAccount(accountId) {
         try {
+            console.log('s:validateAcoutn', accountId)
             const { publicKey } = await this.burstApi.account.getAccount(accountId)
             if (publicKey) {
                 throw new Error('The account is already active')
@@ -78,7 +81,7 @@ export class ActivatorService {
     async __sendWelcomeMessageWithAmount(accountId, publicKey, amountPlanck) {
         let { signPrivateKey, publicKey: senderPublicKey } = this.__getSenderCredentials()
         let suggestedFees = await this.burstApi.network.suggestFee()
-
+        console.debug('fees', suggestedFees.standard)
         const attachment = new AttachmentMessage({
             messageIsText: true,
             message: WelcomeMessage,
