@@ -5,7 +5,7 @@
     "BURST_NODE": "https://wallet.burstcoin.ro",
     "ACTIVATOR_ACCOUNT_SECRET": "@activator-account-mainnet",
     "TEST_NET":"false",
-    "ACTIVATION_AMOUNT": "0",
+    "ACTIVATION_AMOUNT": "0.01",
     "WEB_UI": "true"
   },
   "builds": [
