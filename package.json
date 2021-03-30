@@ -23,8 +23,8 @@
     "test": "jest",
     "now-version": "npx now -v",
     "deploy:pinbox": "npm run now-version & npx now --local-config=now.pinbox.json --prod",
-    "deploy:testnet": "npm run now-version & npx now --local-config=now.testnet.json --prod",
-    "deploy:mainnet": "npm run now-version & npx now --local-config=now.mainnet.json --prod"
+    "deploy:testnet": "npm run now-version & npx now --local-config=now.testnet.json --prod -f",
+    "deploy:mainnet": "npm run now-version & npx now --local-config=now.mainnet.json --prod -f"
   },
   "dependencies": {
     "@burstjs/core": "^0.4.3",
