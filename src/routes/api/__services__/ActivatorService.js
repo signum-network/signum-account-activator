@@ -46,7 +46,7 @@ export class ActivatorService {
     async __validateAccount(accountId) {
         try {
             console.log('validateAccount', accountId)
-            const { publicKey } = await this.burstApi.account.getAccount({ accountId })
+            const { publicKey } = await this.burstApi.account.getAccount(accountId)
 
             if (publicKey) {
                 throw new Error('The account is already active')
@@ -80,7 +80,7 @@ export class ActivatorService {
 
     async __sendWelcomeMessageWithAmount(accountId, publicKey, amountPlanck) {
         let { signPrivateKey, publicKey: senderPublicKey } = this.__getSenderCredentials()
-        let suggestedFees = await this.burstApi.network.getSuggestedFees()
+        let suggestedFees = await this.burstApi.network.suggestFee()
         console.debug('fees', suggestedFees.standard)
         const attachment = new AttachmentMessage({
             messageIsText: true,

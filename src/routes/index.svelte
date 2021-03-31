@@ -7,7 +7,7 @@
 
 <script>
     import { fade } from 'svelte/transition'
-    import { HttpClientFactory } from '@burstjs/http'
+    import { HttpImpl as Http } from '@burstjs/http'
     import Stamp from '../components/Stamp.svelte'
 
     export let account
@@ -20,7 +20,7 @@
         Failed: 2,
     }
 
-    const http = HttpClientFactory.createHttpClient('/api')
+    const http = new Http('/api')
     const InitialTitle = 'Activate your account'
 
     let error = null
