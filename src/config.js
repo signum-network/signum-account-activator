@@ -11,4 +11,5 @@ export const config = {
     activationAmount: parseFloat(process.env.ACTIVATION_AMOUNT),
     isTestnet: isTrue(process.env.TEST_NET),
     webUiAvailable: isTrue(process.env.WEB_UI),
+    verboseLog: isTrue(process.env.VERBOSE_LOG),
 }

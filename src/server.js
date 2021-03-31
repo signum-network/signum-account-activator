@@ -1,13 +1,21 @@
 import polka from 'polka'
 import { middlewares } from './middlewares'
+import { config } from './config'
+import { Logger } from './logger'
 
 const { PORT, NODE_ENV } = process.env
 const dev = NODE_ENV === 'development'
 const app = polka()
-app
-    .use(...middlewares)
-    .listen(PORT, err => {
-        if (err) console.log('error', err)
-    })
+
+const maskedConfig = {
+    ...config,
+    accountSecret: config.accountSecret.substr(0, 4) + '*****',
+}
+
+Logger.log(maskedConfig)
+
+app.use(...middlewares).listen(PORT, err => {
+    if (err) console.log('error', err)
+})
 
 export default app.handler

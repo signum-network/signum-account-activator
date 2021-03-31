@@ -48,7 +48,8 @@
               },
               "example": {
                 "account": "BURST-K37B-9V85-FB95-793HN",
-                "publickey": "7210b8941929030324540238450e985899989a7ad0267e0c76f668fde3b1016b"
+                "publickey": "7210b8941929030324540238450e985899989a7ad0267e0c76f668fde3b1016b",
+                "ref": "phoenix-wallet"
               }
             }
           }
@@ -85,6 +86,7 @@
     "schemas": {
       "Account": {
         "type": "object",
+        "required": ["account", "publickey"],
         "properties": {
           "account": {
             "type": "string",
@@ -93,6 +95,10 @@
           "publickey": {
             "type": "string",
             "description": "The public key in hexadecimal format"
+          },
+          "ref": {
+            "type": "string",
+            "description": "An optional reference to indicate what app is calling the activator, e.g phoenix, btdex"
           }
         }
       },

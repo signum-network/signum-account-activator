@@ -1,15 +1,25 @@
-import pino from 'pino'
-
-const dev = process.env.NODE_ENV === 'development'
+import { Logger } from '../logger'
+import { config } from '../config'
 
 export const logRequests = () => {
-    const logger = pino({
-        name: 'BFF',
-        level: dev ? 'trace' : 'error',
-    })
-
     return function(req, res, next) {
-        logger.debug(`Requested: ${req.method} on ${req.url}`)
+        const { body, method, url, headers } = req
+        const ip =
+            req.headers['x-forwarded-for'] ||
+            req.connection.remoteAddress ||
+            req.socket.remoteAddress ||
+            (req.connection.socket ? req.connection.socket.remoteAddress : null)
+
+        Logger.log(
+            {
+                headers,
+                ip,
+                method,
+                url,
+                body,
+            },
+            true,
+        )
         next()
     }
 }

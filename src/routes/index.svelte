@@ -40,7 +40,7 @@
     const activate = async () => {
         try {
             isLoading = true
-            await http.post('/activate', { account, publickey })
+            await http.post('/activate', { account, publickey, ref: 'self' })
             activationState = ActivationState.Activated
             title = 'Successfully activated'
             reset()

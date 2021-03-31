@@ -2,6 +2,7 @@ import { generateMasterKeys, getAccountIdFromPublicKey } from '@burstjs/crypto'
 import { convertAddressToNumericId, isBurstAddress, BurstValue } from '@burstjs/util'
 import { ApiSettings, AttachmentMessage, composeApi } from '@burstjs/core'
 import { config } from '../../../config'
+import { Logger } from '../../../logger'
 
 const WelcomeMessage =
     'Welcome to the Burst Network. The truly decentralized, public, and environment friendly blockchain platform'
@@ -12,6 +13,31 @@ export class ActivatorService {
     constructor() {
         this.burstApi = composeApi(new ApiSettings(config.burstNodeHost))
         console.log('host:', config.burstNodeHost)
+        this.__ensureAccountId = this.__log(this.__ensureAccountId)
+        this.__validateAddressKeyPair = this.__log(this.__validateAddressKeyPair)
+        this.__getSenderCredentials = this.__log(this.__getSenderCredentials)
+        this.__validatePendingActivation = this.__log(this.__validatePendingActivation)
+        this.__validateAccount = this.__log(this.__validateAccount)
+        this.__sendWelcomeMessage = this.__log(this.__sendWelcomeMessage)
+        this.__sendWelcomeMessageWithAmount = this.__log(this.__sendWelcomeMessageWithAmount)
+        this.activate = this.__log(this.activate)
+    }
+
+    __log(fn) {
+        return function() {
+            const ctx = `ActivatorService.${fn.name}`
+            const args = arguments
+            Logger.verbose({
+                ctx,
+                args,
+            })
+            try {
+                return fn.apply(this, args)
+            } catch (e) {
+                Logger.verbose({ ctx, args, err: e.message })
+                throw e
+            }
+        }
     }
 
     __ensureAccountId(account) {
@@ -45,9 +71,7 @@ export class ActivatorService {
 
     async __validateAccount(accountId) {
         try {
-            console.log('validateAccount', accountId)
             const { publicKey } = await this.burstApi.account.getAccount(accountId)
-
             if (publicKey) {
                 throw new Error('The account is already active')
             }
@@ -81,7 +105,6 @@ export class ActivatorService {
     async __sendWelcomeMessageWithAmount(accountId, publicKey, amountPlanck) {
         let { signPrivateKey, publicKey: senderPublicKey } = this.__getSenderCredentials()
         let suggestedFees = await this.burstApi.network.suggestFee()
-        console.debug('fees', suggestedFees.standard)
         const attachment = new AttachmentMessage({
             messageIsText: true,
             message: WelcomeMessage,
@@ -111,6 +134,7 @@ export class ActivatorService {
         // const amountPlanck = convertNumberToNQTString(config.activationAmount)
         const value = BurstValue.fromBurst(0.0147)
         await this.__sendWelcomeMessageWithAmount(accountId, publicKey, value.getPlanck())
+        this.__log(`Activated ${accountId} ...`)
         // }
     }
 }

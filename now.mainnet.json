@@ -6,7 +6,8 @@
     "ACTIVATOR_ACCOUNT_SECRET": "@activator-account-mainnet",
     "TEST_NET":"false",
     "ACTIVATION_AMOUNT": "0.0147",
-    "WEB_UI": "true"
+    "WEB_UI": "true",
+    "VERBOSE_LOG":"true"
   },
   "builds": [
     {
