@@ -23,7 +23,9 @@ function log(obj, flush = false) {
 }
 
 function verbose(obj) {
-    config.verboseLog && log(obj)
+    if (config.verboseLog) {
+        log(obj)
+    }
 }
 
 function logError(errmsg, obj) {

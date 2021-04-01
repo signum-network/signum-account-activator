@@ -1,6 +1,8 @@
 import { config as loadConfig } from 'dotenv'
 
-loadConfig()
+if (process.env.NODE_ENV === 'development') {
+    loadConfig()
+}
 
 const isTrue = bool => bool === 'true'
 

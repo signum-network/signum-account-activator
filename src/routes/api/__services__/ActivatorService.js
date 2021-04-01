@@ -131,10 +131,8 @@ export class ActivatorService {
         // if (config.activationAmount === 0) {
         //     await this.__sendWelcomeMessage(accountId, publicKey)
         // } else {
-        // const amountPlanck = convertNumberToNQTString(config.activationAmount)
         const value = BurstValue.fromBurst(0.0147)
         await this.__sendWelcomeMessageWithAmount(accountId, publicKey, value.getPlanck())
-        this.__log(`Activated ${accountId} ...`)
         // }
     }
 }
