@@ -1,9 +1,24 @@
 import { activatorService } from './__services__/ActivatorService'
 import { messageResponse } from './__helpers__/messageResponse'
 import { Logger } from '../../logger'
+import { Address } from '@burstjs/core'
 
 export const post = async (req, res) => {
-    const { account, publickey} = req.body
+    let { account, publickey } = req.body
+
+    if (!publickey && account.startsWith('BURST-')) {
+        try {
+            const address = Address.fromExtendedRSAddress(account)
+            account = address.getAccountId()
+            publickey = address.getPublicKey()
+        } catch (e) {
+            res.statusCode = 400
+            const msg = 'Field [account] is not a valid extended RS address.'
+            Logger.logError(msg, { status: 400 })
+            res.end(messageResponse(msg))
+        }
+    }
+
     if (account && publickey) {
         try {
             await activatorService.activate(account, publickey)

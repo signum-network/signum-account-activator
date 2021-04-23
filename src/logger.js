@@ -18,6 +18,10 @@ function close() {
 }
 
 function log(obj, flush = false) {
+    if (dev) {
+        console.log('[DEV] - ', JSON.stringify(obj))
+    }
+
     logger.log(obj)
     flush && close()
 }

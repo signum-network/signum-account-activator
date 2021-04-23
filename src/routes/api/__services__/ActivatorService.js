@@ -12,7 +12,6 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = config.isTestnet ? '0' : '1'
 export class ActivatorService {
     constructor() {
         this.burstApi = composeApi(new ApiSettings(config.burstNodeHost))
-        console.log('host:', config.burstNodeHost)
         this.__ensureAccountId = this.__log(this.__ensureAccountId)
         this.__validateAddressKeyPair = this.__log(this.__validateAddressKeyPair)
         this.__getSenderCredentials = this.__log(this.__getSenderCredentials)
@@ -71,7 +70,7 @@ export class ActivatorService {
 
     async __validateAccount(accountId) {
         try {
-            const { publicKey } = await this.burstApi.account.getAccount(accountId)
+            const { publicKey } = await this.burstApi.account.getAccount({ accountId })
             if (publicKey) {
                 throw new Error('The account is already active')
             }
@@ -90,7 +89,7 @@ export class ActivatorService {
 
     async __sendWelcomeMessage(accountId, publicKey) {
         let { signPrivateKey, publicKey: senderPublicKey } = this.__getSenderCredentials()
-        let suggestedFees = await this.burstApi.network.suggestFee()
+        let suggestedFees = await this.burstApi.network.getSuggestedFees()
         const sendMessageArgs = {
             message: WelcomeMessage,
             recipientId: accountId,
@@ -104,7 +103,7 @@ export class ActivatorService {
 
     async __sendWelcomeMessageWithAmount(accountId, publicKey, amountPlanck) {
         let { signPrivateKey, publicKey: senderPublicKey } = this.__getSenderCredentials()
-        let suggestedFees = await this.burstApi.network.suggestFee()
+        let suggestedFees = await this.burstApi.network.getSuggestedFees()
         const attachment = new AttachmentMessage({
             messageIsText: true,
             message: WelcomeMessage,
@@ -127,13 +126,12 @@ export class ActivatorService {
         this.__validateAddressKeyPair(accountId, publicKey)
         await this.__validateAccount(accountId)
         await this.__validatePendingActivation(accountId)
-        // TODO: see why we have a problems here!
-        // if (config.activationAmount === 0) {
-        //     await this.__sendWelcomeMessage(accountId, publicKey)
-        // } else {
-        const value = BurstValue.fromBurst(0.0147)
-        await this.__sendWelcomeMessageWithAmount(accountId, publicKey, value.getPlanck())
-        // }
+        if (config.activationAmount === 0) {
+            await this.__sendWelcomeMessage(accountId, publicKey)
+        } else {
+            const value = BurstValue.fromBurst(config.activationAmount)
+            await this.__sendWelcomeMessageWithAmount(accountId, publicKey, value.getPlanck())
+        }
     }
 }
 

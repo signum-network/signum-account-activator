@@ -15,7 +15,7 @@ const maskedConfig = {
 Logger.log(maskedConfig)
 
 app.use(...middlewares).listen(PORT, err => {
-    if (err) console.log('error', err)
+    if (err) Logger.logError(err)
 })
 
 export default app.handler

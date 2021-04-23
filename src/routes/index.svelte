@@ -1,13 +1,15 @@
-<script context="module">
+<script context='module'>
+
     export async function preload(page, session) {
-        const { account, publickey } = page.query
+        let { account, publickey } = page.query
         return { account, publickey, isTestnet: process.env.TEST_NET === 'true' }
     }
 </script>
 
 <script>
     import { fade } from 'svelte/transition'
-    import { HttpImpl as Http } from '@burstjs/http'
+    import { Address } from '@burstjs/core'
+    import { HttpClientFactory } from '@burstjs/http'
     import Stamp from '../components/Stamp.svelte'
 
     export let account
@@ -20,7 +22,7 @@
         Failed: 2,
     }
 
-    const http = new Http('/api')
+    const http = HttpClientFactory.createHttpClient('/api')
     const InitialTitle = 'Activate your account'
 
     let error = null
@@ -28,6 +30,17 @@
     let activationState = ActivationState.New
     let title = InitialTitle
     $: canActivate = !isLoading && account && publickey
+    $: {
+        if (!publickey && account && account.startsWith('BURST-')) {
+            try {
+                const address = Address.fromExtendedRSAddress(account)
+                account = address.getReedSolomonAddress()
+                publickey = address.getPublicKey()
+            } catch (e) {
+                // noop
+            }
+        }
+    }
 
     const reset = () => {
         account = null
@@ -98,31 +111,31 @@
 </svelte:head>
 
 
-<section class="hero">
-    <div class="hero-body">
-        <div class="container">
+<section class='hero'>
+    <div class='hero-body'>
+        <div class='container'>
             {#if isTestnet}
                 <div class='stamp-wrapper'>
                     <Stamp text='Testnet'></Stamp>
                 </div>
             {/if}
-            <a href="https://www.burst-coin.org/" target="_blank" rel="noopener">
+            <a href='https://www.burst-coin.org/' target='_blank' rel='noopener'>
                 <figure>
-                    <img class="is-600px-width" alt='Burst' src='sticker-burst-1.svg'>
+                    <img class='is-600px-width' alt='Burst' src='sticker-burst-1.svg'>
                 </figure>
             </a>
-            <h1 class="subtitle is-uppercase is-size-2-tablet is-size-4-mobile">
+            <h1 class='subtitle is-uppercase is-size-2-tablet is-size-4-mobile'>
                 {title}
             </h1>
         </div>
     </div>
 </section>
 
-<section class="form">
+<section class='form'>
     {#if activationState === ActivationState.Activated}
-        <div transition:fade class="success">
+        <div transition:fade class='success'>
             <figure>
-                <img class="is-256px-height" src="success.png" alt="Success"/>
+                <img class='is-256px-height' src='success.png' alt='Success' />
             </figure>
             <small>
                 A welcome message was sent to your account. You'll receive it in a few moments.
@@ -130,26 +143,26 @@
         </div>
     {:else }
         <div>
-            <div class="field">
-                <label class="label">Account Address or Id</label>
-                <div class="control">
-                    <input class="input is-large" type="text" placeholder="Enter Account Address or Id"
-                           bind:value={account}/>
+            <div class='field'>
+                <label class='label'>Account Address or Id</label>
+                <div class='control'>
+                    <input class='input is-large' type='text' placeholder='Enter Account Address or Id'
+                           bind:value={account} />
                 </div>
             </div>
-            <div class="field">
-                <label class="label">Public Key</label>
-                <div class="control">
-                    <input class="input is-large" type="text" placeholder="Enter Public Key" bind:value={publickey}/>
+            <div class='field'>
+                <label class='label'>Public Key</label>
+                <div class='control'>
+                    <input class='input is-large' type='text' placeholder='Enter Public Key' bind:value={publickey} />
                 </div>
             </div>
             {#if error}
-                <div in:fade="{{duration: 500}}" class="notification is-danger">
-                    <button class="delete" on:click={closeError}></button>
+                <div in:fade='{{duration: 500}}' class='notification is-danger'>
+                    <button class='delete' on:click={closeError}></button>
                     <small>{error}</small>
                 </div>
             {:else}
-                <div class="buttons">
+                <div class='buttons'>
                     <button class={`button is-primary is-large ${isLoading ? 'is-loading' : ''}`}
                             on:click={async () => await activate()}
                             disabled={!canActivate}>Activate
