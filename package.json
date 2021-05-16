@@ -21,8 +21,9 @@
     "compile": "sapper build",
     "start": "node __sapper__/build",
     "test": "jest",
-    "init": "./scripts/postinstall.sh",
-    "deploy": "npx vercel"
+    "init": "./scripts/init.sh",
+    "deploy:testnet": "npx vercel",
+    "deploy:mainnet": "npx vercel --prod"
   },
   "dependencies": {
     "@burstjs/core": "^0.6.0-beta.5",
@@ -48,7 +49,6 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-svelte3": "^2.7.3",
     "jest": "^25.1.0",
-    "now": "^16.7.3",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.19.1",
     "sapper": "^0.27.16",
