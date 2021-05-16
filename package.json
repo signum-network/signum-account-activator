@@ -21,7 +21,8 @@
     "compile": "sapper build",
     "start": "node __sapper__/build",
     "test": "jest",
-    "postinstall": "./scripts/postinstall.sh"
+    "init": "./scripts/postinstall.sh",
+    "deploy": "npx vercel"
   },
   "dependencies": {
     "@burstjs/core": "^0.6.0-beta.5",
