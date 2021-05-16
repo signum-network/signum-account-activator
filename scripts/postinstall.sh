@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ -v CI ]; then
+  exit 0
+fi
+
 FILE=.env
 if [ -f "$FILE" ]; then
     echo "$FILE exists...all fine!"
