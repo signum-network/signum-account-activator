@@ -73,9 +73,8 @@ This project is configured to be hosted on _Vercel_
 1. Create an account on [Vercel](https://vercel.com/)
 2. Having a Signum account, which will serve as activator account (the one that sends the welcome messages)
 
-// TO DO
-
 #### Deploy
- 
- - Deploy a testnet (staging) version: `npm run deploy:staging`
- - Deploy a mainnet (production) version: `npm run deploy:production`
+> On first time deploy the deployment might fail as you need to set up the environment variables. You can do it using the [Vercel CLI](https://vercel.com/docs/cli#commands/env) tool or on the [Vercel platform](https://vercel.com/docs/environment-variables) itself (recommended)
+
+ - Deploy a testnet (staging) version: `npm run deploy-testnet`
+ - Deploy a mainnet (production) version: `npm run deploy-mainnet`
