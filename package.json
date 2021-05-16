@@ -21,7 +21,7 @@
     "compile": "sapper build",
     "start": "node __sapper__/build",
     "test": "jest",
-    "postinstall": "cp .env.default .env"
+    "postinstall": "./scripts/postinstall.sh"
   },
   "dependencies": {
     "@burstjs/core": "^0.6.0-beta.5",
