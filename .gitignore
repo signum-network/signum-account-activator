@@ -10,3 +10,5 @@ yarn-error.log
 *.log
 .now
 .env
+
+.vercel
