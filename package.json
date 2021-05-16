@@ -22,11 +22,11 @@
     "start": "node __sapper__/build",
     "test": "jest",
     "init": "./scripts/init.sh",
-    "deploy:testnet": "npx vercel",
-    "deploy:mainnet": "npx vercel --prod"
+    "deploy-testnet": "npx vercel",
+    "deploy-mainnet": "npx vercel --prod"
   },
   "dependencies": {
-    "@burstjs/core": "^0.6.0-beta.5",
+    "@burstjs/core": "^0.6.0-beta.6",
     "body-parser": "latest",
     "bulma": "^0.8.0",
     "compression": "^1.7.4",

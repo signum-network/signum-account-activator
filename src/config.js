@@ -7,7 +7,7 @@ if (process.env.NODE_ENV === 'development') {
 const isTrue = bool => bool === 'true'
 
 export const config = {
-    burstNodeHost: process.env.BURST_NODE,
+    nodeHosts: process.env.SIGNUM_NODE,
     donationAccount: process.env.DONATION_ACCOUNT,
     accountSecret: process.env.ACTIVATOR_ACCOUNT_SECRET,
     activationAmount: parseFloat(process.env.ACTIVATION_AMOUNT),

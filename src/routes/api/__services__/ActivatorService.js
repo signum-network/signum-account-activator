@@ -5,13 +5,14 @@ import { config } from '../../../config'
 import { Logger } from '../../../logger'
 
 const WelcomeMessage =
-    'Welcome to the Burst Network. The truly decentralized, public, and environment friendly blockchain platform'
+    'Welcome to the Signum Network. The truly decentralized, public, and sustainable blockchain platform'
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = config.isTestnet ? '0' : '1'
 
 export class ActivatorService {
     constructor() {
-        this.burstApi = composeApi(new ApiSettings(config.burstNodeHost))
+        // TODO: build on top of reliable nodes
+        this.signumApi = composeApi(new ApiSettings(config.nodeHosts))
         this.__ensureAccountId = this.__log(this.__ensureAccountId)
         this.__validateAddressKeyPair = this.__log(this.__validateAddressKeyPair)
         this.__getSenderCredentials = this.__log(this.__getSenderCredentials)
@@ -40,6 +41,7 @@ export class ActivatorService {
     }
 
     __ensureAccountId(account) {
+        // FIXME: change to Signum stuff.
         return isBurstAddress(account) ? convertAddressToNumericId(account) : account
     }
 
@@ -62,7 +64,7 @@ export class ActivatorService {
         const { id: senderId } = this.__getSenderCredentials()
         const {
             unconfirmedTransactions,
-        } = await this.burstApi.account.getUnconfirmedAccountTransactions(senderId, false)
+        } = await this.signumApi.account.getUnconfirmedAccountTransactions(senderId, false)
         if (unconfirmedTransactions.some(({ recipient }) => recipient === recipientId)) {
             throw new Error('Activation is pending')
         }
@@ -70,7 +72,7 @@ export class ActivatorService {
 
     async __validateAccount(accountId) {
         try {
-            const { publicKey } = await this.burstApi.account.getAccount({ accountId })
+            const { publicKey } = await this.signumApi.account.getAccount({ accountId })
             if (publicKey) {
                 throw new Error('The account is already active')
             }
@@ -89,7 +91,7 @@ export class ActivatorService {
 
     async __sendWelcomeMessage(accountId, publicKey) {
         let { signPrivateKey, publicKey: senderPublicKey } = this.__getSenderCredentials()
-        let suggestedFees = await this.burstApi.network.getSuggestedFees()
+        let suggestedFees = await this.signumApi.network.getSuggestedFees()
         const sendMessageArgs = {
             message: WelcomeMessage,
             recipientId: accountId,
@@ -98,12 +100,12 @@ export class ActivatorService {
             senderPrivateKey: signPrivateKey,
             senderPublicKey: senderPublicKey,
         }
-        await this.burstApi.message.sendMessage(sendMessageArgs)
+        await this.signumApi.message.sendMessage(sendMessageArgs)
     }
 
     async __sendWelcomeMessageWithAmount(accountId, publicKey, amountPlanck) {
         let { signPrivateKey, publicKey: senderPublicKey } = this.__getSenderCredentials()
-        let suggestedFees = await this.burstApi.network.getSuggestedFees()
+        let suggestedFees = await this.signumApi.network.getSuggestedFees()
         const attachment = new AttachmentMessage({
             messageIsText: true,
             message: WelcomeMessage,
@@ -118,7 +120,7 @@ export class ActivatorService {
             senderPrivateKey: signPrivateKey,
             senderPublicKey: senderPublicKey,
         }
-        await this.burstApi.transaction.sendAmountToSingleRecipient(args)
+        await this.signumApi.transaction.sendAmountToSingleRecipient(args)
     }
 
     async activate(account, publicKey) {
