@@ -7,12 +7,12 @@
   "license": "Apache 2.0",
   "repository": {
     "type": "github",
-    "url": "https://github.com/signumnetwork/signum-account-activator"
+    "url": "https://github.com/signum-network/signum-account-activator"
   },
   "engines": {
     "node": "14"
   },
-  "description": "Tiny service to easily activate a Signum Account",
+  "description": "Web service and UI to activate a Signum Account",
   "version": "1.0.0",
   "scripts": {
     "dev": "sapper dev",
