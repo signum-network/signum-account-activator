@@ -22,9 +22,7 @@
         width: 100%;
         height: var(--dim-footer-height);
         text-align: end;
-        border-top: 1px darkgrey solid;
         padding: var(--dim-small-gap);
-
     }
 
     .donation{
@@ -40,7 +38,7 @@
 </style>
 
 
-<footer class="has-background-white">
+<footer>
     <div class="footer-content">
         <div class="svelte-heart">
             <small>Built with ❤️ and</small>
@@ -50,7 +48,7 @@
         </div>
         <div class="donation">
             <small>
-                <a href="/buymeabeer">Buy me a beer 🍺</a>
+                <a class="has-text-white" href="/buymeabeer">Buy me a beer 🍺</a>
             </small>
         </div>
         <a href="https://burst-apps-team.github.io/phoenix" target="_blank" rel="noopener">

@@ -4,7 +4,7 @@
 
 <style>
     .stamp {
-        transform: rotate(12deg);
+        transform: rotate(-12deg);
         color: #555;
         font-size: 3rem;
         font-weight: 700;
@@ -16,7 +16,6 @@
         font-family: 'Courier', serif;
         -webkit-mask-image: url('texture.png');
         -webkit-mask-size: 256px 256px;
-        mix-blend-mode: multiply;
     }
 
     .is-nope {

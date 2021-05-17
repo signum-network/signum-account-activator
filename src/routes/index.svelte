@@ -100,14 +100,14 @@
 
     .stamp-wrapper {
         position: absolute;
-        top: -3em;
-        left: -2em;
+        top: 0;
+        right: -2em;
     }
 
 </style>
 
 <svelte:head>
-    <title>Burst Account Activator</title>
+    <title>Signum Account Activator</title>
 </svelte:head>
 
 
@@ -119,9 +119,9 @@
                     <Stamp text='Testnet'></Stamp>
                 </div>
             {/if}
-            <a href='https://www.burst-coin.org/' target='_blank' rel='noopener'>
+            <a href='https://signum.network/' target='_blank' rel='noopener'>
                 <figure>
-                    <img class='is-600px-width' alt='Burst' src='sticker-burst-1.svg'>
+                    <img class='is-600px-width' alt='Signum Logo' src='signum.svg'>
                 </figure>
             </a>
             <h1 class='subtitle is-uppercase is-size-2-tablet is-size-4-mobile'>
@@ -163,7 +163,7 @@
                 </div>
             {:else}
                 <div class='buttons'>
-                    <button class={`button is-primary is-large ${isLoading ? 'is-loading' : ''}`}
+                    <button class={`button is-primary is-light is-large ${isLoading ? 'is-loading' : ''}`}
                             on:click={async () => await activate()}
                             disabled={!canActivate}>Activate
                     </button>

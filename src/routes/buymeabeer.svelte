@@ -1,5 +1,5 @@
 <script>
-    let donationAccount = 'BURST-9K9L-4CB5-88Y5-F5G4Z'
+    let donationAccount = 'S-9K9L-4CB5-88Y5-F5G4Z'
     let hasCopied = false
     const copyAddress = () => {
         navigator.clipboard.writeText(donationAccount)
@@ -40,9 +40,9 @@
 <section class="hero">
     <div class="hero-body">
         <div class="container center-text">
-            <a href="https://www.burst-coin.org/" target="_blank" rel="noopener">
+            <a href="https://signum.network" target="_blank" rel="noopener">
                 <figure>
-                    <img class="is-600px-width" alt='Burst' src='sticker-burst-1.svg'>
+                    <img class="is-600px-width" alt='Burst' src='signum.svg'>
                 </figure>
             </a>
             <h2 class="subtitle is-uppercase is-size-2-tablet is-size-4-mobile center-text">
@@ -54,14 +54,12 @@
 
 <section class="content center-text">
     <figure>
-        <img src="ohager_bat.png" alt="Burst Apps Team Member ohager">
+        <img src="ohager_bat.png" alt="Signum Network Member ohager">
     </figure>
     <h3>
-<!--        <a href="burst.payment://v1?action=send&payload=e3JlY2lwaWVudElkOjE2MTA3NjIwMDI2Nzk2OTgzNTM4O2Ftb3VudDoxMDB9">-->
-<!--            {donationAccount}</a>-->
-        <a href={`burst://requestBurst?receiver=${donationAccount}`}>{donationAccount}</a>
+      <a class="has-text-white" href={`burst://requestBurst?receiver=${donationAccount}`}>{donationAccount}</a>
     </h3>
-    <button class={`button is-small ${hasCopied && 'is-success'}`}
+    <button class="button" on:click={returnHome}>Back</button>
+    <button class={`button ${hasCopied && 'is-success'}`}
             on:click={copyAddress}>{ hasCopied ? 'Address Copied': 'Copy Address'}</button>
-    <button class="button is-small" on:click={returnHome}>Back</button>
 </section>
