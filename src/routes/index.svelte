@@ -104,6 +104,10 @@
         right: -2em;
     }
 
+    .whitened {
+        filter: invert();
+    }
+
 </style>
 
 <svelte:head>
@@ -135,23 +139,23 @@
     {#if activationState === ActivationState.Activated}
         <div transition:fade class='success'>
             <figure>
-                <img class='is-256px-height' src='success.png' alt='Success' />
+                <img class='is-256px-height whitened' src='success.png' alt='Success' />
             </figure>
-            <small>
+            <small class="has-text-white">
                 A welcome message was sent to your account. You'll receive it in a few moments.
             </small>
         </div>
     {:else }
         <div>
             <div class='field'>
-                <label class='label'>Account Address or Id</label>
+                <label class='label has-text-white'>Account Address or Id</label>
                 <div class='control'>
                     <input class='input is-large' type='text' placeholder='Enter Account Address or Id'
                            bind:value={account} />
                 </div>
             </div>
             <div class='field'>
-                <label class='label'>Public Key</label>
+                <label class='label has-text-white'>Public Key</label>
                 <div class='control'>
                     <input class='input is-large' type='text' placeholder='Enter Public Key' bind:value={publickey} />
                 </div>

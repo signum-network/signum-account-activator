@@ -6,7 +6,7 @@
 
     const dev = process.env.NODE_ENV === 'development'
 
-    let timeToRedirect = 5
+    let timeToRedirect = 10
     const interval = setInterval(() => {
         if (--timeToRedirect === 0) {
             location.replace('/')
@@ -64,7 +64,7 @@
         <div class="container center-text">
             <a href="https://www.burst-coin.org/" target="_blank" rel="noopener">
                 <figure>
-                    <img class="is-600px-width" alt='Burst' src='sticker-burst-1.svg'>
+                    <img class="is-600px-width" alt='Burst' src='signum.svg'>
                 </figure>
             </a>
             <h1 class="subtitle is-uppercase is-size-2-tablet is-size-4-mobile center-text">

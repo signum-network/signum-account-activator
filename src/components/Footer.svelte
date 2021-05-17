@@ -35,6 +35,11 @@
             font-size: .5em;
         }
     }
+
+    .burstjs {
+        border-radius: 4px;
+        opacity: 0.8;
+    }
 </style>
 
 
@@ -52,7 +57,7 @@
             </small>
         </div>
         <a href="https://burst-apps-team.github.io/phoenix" target="_blank" rel="noopener">
-            <img src="burst-js.svg" alt="BurstJS Logo"/>
+            <img class="burstjs" src="burst-js.svg" alt="BurstJS Logo"/>
         </a>
     </div>
 </footer>
