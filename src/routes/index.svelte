@@ -8,8 +8,8 @@
 
 <script>
     import { fade } from 'svelte/transition'
-    import { Address } from '@burstjs/core'
-    import { HttpClientFactory } from '@burstjs/http'
+    import { Address } from '@signumjs/core'
+    import { HttpClientFactory } from '@signumjs/http'
     import Stamp from '../components/Stamp.svelte'
 
     export let account
@@ -31,9 +31,9 @@
     let title = InitialTitle
     $: canActivate = !isLoading && account && publickey
     $: {
-        if (!publickey && account && account.startsWith('BURST-')) {
+        if (!publickey && account) {
             try {
-                const address = Address.fromExtendedRSAddress(account)
+                const address = Address.create(account)
                 account = address.getReedSolomonAddress()
                 publickey = address.getPublicKey()
             } catch (e) {

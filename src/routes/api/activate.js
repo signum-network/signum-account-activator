@@ -1,19 +1,19 @@
 import { activatorService } from './__services__/ActivatorService'
 import { messageResponse } from './__helpers__/messageResponse'
 import { Logger } from '../../logger'
-import { Address } from '@burstjs/core'
+import { Address } from '@signumjs/core'
 
 export const post = async (req, res) => {
     let { account, publickey } = req.body
 
-    if (!publickey && account.startsWith('BURST-')) {
+    if (!publickey) {
         try {
-            const address = Address.fromExtendedRSAddress(account)
-            account = address.getAccountId()
+            const address = Address.create(account)
+            account = address.getNumericId()
             publickey = address.getPublicKey()
         } catch (e) {
             res.statusCode = 400
-            const msg = 'Field [account] is not a valid extended RS address.'
+            const msg = 'Field [account] is not a valid Signum address.'
             Logger.logError(msg, { status: 400 })
             res.end(messageResponse(msg))
         }

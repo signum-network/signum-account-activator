@@ -1,6 +1,6 @@
-import { generateMasterKeys, getAccountIdFromPublicKey } from '@burstjs/crypto'
-import { convertAddressToNumericId, isBurstAddress, BurstValue } from '@burstjs/util'
-import { ApiSettings, AttachmentMessage, composeApi } from '@burstjs/core'
+import { generateMasterKeys, getAccountIdFromPublicKey } from '@signumjs/crypto'
+import { Amount } from '@signumjs/util'
+import { ApiSettings, AttachmentMessage, composeApi, Address } from '@signumjs/core'
 import { config } from '../../../config'
 import { Logger } from '../../../logger'
 
@@ -13,7 +13,6 @@ export class ActivatorService {
     constructor() {
         // TODO: build on top of reliable nodes
         this.signumApi = composeApi(new ApiSettings(config.nodeHosts))
-        this.__ensureAccountId = this.__log(this.__ensureAccountId)
         this.__validateAddressKeyPair = this.__log(this.__validateAddressKeyPair)
         this.__getSenderCredentials = this.__log(this.__getSenderCredentials)
         this.__validatePendingActivation = this.__log(this.__validatePendingActivation)
@@ -38,11 +37,6 @@ export class ActivatorService {
                 throw e
             }
         }
-    }
-
-    __ensureAccountId(account) {
-        // FIXME: change to Signum stuff.
-        return isBurstAddress(account) ? convertAddressToNumericId(account) : account
     }
 
     __validateAddressKeyPair(accountId, publicKey) {
@@ -124,15 +118,15 @@ export class ActivatorService {
     }
 
     async activate(account, publicKey) {
-        const accountId = this.__ensureAccountId(account)
+        const accountId = Address.create(account).getNumericId()
         this.__validateAddressKeyPair(accountId, publicKey)
         await this.__validateAccount(accountId)
         await this.__validatePendingActivation(accountId)
         if (config.activationAmount === 0) {
             await this.__sendWelcomeMessage(accountId, publicKey)
         } else {
-            const value = BurstValue.fromBurst(config.activationAmount)
-            await this.__sendWelcomeMessageWithAmount(accountId, publicKey, value.getPlanck())
+            const amount = Amount.fromSigna(config.activationAmount)
+            await this.__sendWelcomeMessageWithAmount(accountId, publicKey, amount.getPlanck())
         }
     }
 }
