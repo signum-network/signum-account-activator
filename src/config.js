@@ -14,4 +14,5 @@ export const config = {
     isTestnet: isTrue(process.env.TEST_NET),
     webUiAvailable: isTrue(process.env.WEB_UI),
     verboseLog: isTrue(process.env.VERBOSE_LOG),
+    redisUrl: process.env.REDIS_URL,
 }

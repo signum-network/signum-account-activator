@@ -1,16 +1,22 @@
 import { isApiRequest } from './__helpers___/isApiRequest'
-import rateLimit from 'express-rate-limit'
+import { config } from '../config'
+import RateLimit from 'express-rate-limit'
+import RedisStore from 'rate-limit-redis'
+import Redis from 'ioredis'
 import { messageResponse } from '../routes/api/__helpers__/messageResponse'
 
-const limiter = rateLimit({
-    windowMs: 10 * 1000,
+const client = new Redis(config.redisUrl)
+
+const limiter = new RateLimit({
+    store: new RedisStore({ client }),
+    resetExpiryOnChange: true,
+    passIfNotConnected: true,
+    windowMs: 30 * 1000,
     max: 1,
     handler: function(req, res) {
         res.statusCode = 429
         res.end(
-            messageResponse(
-                'Too many activations per allowed time frame. Try again in a few moments!',
-            ),
+            messageResponse('Too many calls per allowed time frame. Try again in a few moments!'),
         )
     },
 })
