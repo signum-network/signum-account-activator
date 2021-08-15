@@ -2,7 +2,7 @@
   "version": 2,
   "name": "burst-account-activator",
   "env": {
-    "BURST_NODE": "https://wallet.burstcoin.ro",
+    "BURST_NODE": "https://europe.signum.network",
     "ACTIVATOR_ACCOUNT_SECRET": "@activator-account-mainnet",
     "TEST_NET":"false",
     "ACTIVATION_AMOUNT": "0.0147",
