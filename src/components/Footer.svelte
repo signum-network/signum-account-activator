@@ -36,16 +36,17 @@
         }
     }
 
-    .burstjs {
-        border-radius: 4px;
-        opacity: 0.8;
+    .signumjs {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
     }
 </style>
 
 
 <footer>
     <div class="footer-content">
-        <div class="svelte-heart">
+        <div class="svelte-heart has-text-white">
             <small>Built with ❤️ and</small>
             <a href="https://svelte.dev" target="_blank" rel="noopener">
                 <img class="small-img" src="svelte.svg" alt="Svelte Logo">
@@ -56,8 +57,11 @@
                 <a class="has-text-white" href="/buymeabeer">Buy me a beer 🍺</a>
             </small>
         </div>
-        <a href="https://burst-apps-team.github.io/phoenix" target="_blank" rel="noopener">
-            <img class="burstjs" src="burst-js.svg" alt="BurstJS Logo"/>
+        <a href="https://signum-network.github.io/signumjs" target="_blank" rel="noopener">
+            <span class="signumjs">
+              <small class="has-text-white mr-1">Powered by</small>
+              <img src="signumjs.svg" alt="SignumJS Logo"/>
+            </span>
         </a>
     </div>
 </footer>

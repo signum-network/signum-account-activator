@@ -26,9 +26,12 @@
     "deploy-mainnet": "npx vercel --prod"
   },
   "dependencies": {
-    "@signumjs/core": "^1.0.0-rc.1",
+    "@signumjs/core": "^1.0.0-rc.4",
+    "@signumjs/http": "^1.0.0-rc.4",
+    "@signumjs/util": "^1.0.0-rc.4",
+    "@signumjs/crypto": "^1.0.0-rc.4",
     "body-parser": "latest",
-    "bulma": "^0.8.0",
+    "bulma": "^0.8.2",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",

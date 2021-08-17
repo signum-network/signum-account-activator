@@ -1,6 +1,6 @@
 import { generateMasterKeys, getAccountIdFromPublicKey } from '@signumjs/crypto'
 import { Amount } from '@signumjs/util'
-import { ApiSettings, AttachmentMessage, composeApi, Address } from '@signumjs/core'
+import { AttachmentMessage, composeApi, Address } from '@signumjs/core'
 import { config } from '../../../config'
 import { Logger } from '../../../logger'
 
@@ -11,8 +11,17 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = config.isTestnet ? '0' : '1'
 
 export class ActivatorService {
     constructor() {
-        // TODO: build on top of reliable nodes
-        this.signumApi = composeApi(new ApiSettings(config.nodeHosts))
+        this.signumApi = composeApi({
+            nodeHost: config.nodeHosts,
+            reliableNodeHosts: [
+                'https://australia.signum.network',
+                'https://europe.signum.network',
+                'https://brazil.signum.network',
+                'https://canada.signum.network',
+                'https://wallet.burstcoin.ro',
+            ],
+          }
+        )
         this.__validateAddressKeyPair = this.__log(this.__validateAddressKeyPair)
         this.__getSenderCredentials = this.__log(this.__getSenderCredentials)
         this.__validatePendingActivation = this.__log(this.__validatePendingActivation)

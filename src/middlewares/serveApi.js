@@ -8,10 +8,12 @@ import { messageResponse } from '../routes/api/__helpers__/messageResponse'
 const client = new Redis(config.redisUrl)
 
 const limiter = new RateLimit({
-    store: new RedisStore({ client }),
-    resetExpiryOnChange: true,
-    passIfNotConnected: true,
-    windowMs: 30 * 1000,
+    store: new RedisStore({
+        client,
+        resetExpiryOnChange: true,
+        passIfNotConnected: true,
+    }),
+    windowMs: 60 * 1000,
     max: 1,
     handler: function(req, res) {
         res.statusCode = 429

@@ -1,6 +1,18 @@
 <script>
+    import { Amount, createDeeplink } from "@signumjs/util";
+
     let donationAccount = 'S-9K9L-4CB5-88Y5-F5G4Z'
     let hasCopied = false
+    let deeplink = createDeeplink({
+        action: 'pay',
+        payload: {
+            recipient: donationAccount,
+            amountPlanck: Amount.fromSigna(50).getPlanck(),
+            message: 'Buy you a beer 🍻',
+            messageIsText: true,
+        },
+    })
+
     const copyAddress = () => {
         navigator.clipboard.writeText(donationAccount)
         hasCopied = true
@@ -40,12 +52,7 @@
 <section class="hero">
     <div class="hero-body">
         <div class="container center-text">
-            <a href="https://signum.network" target="_blank" rel="noopener">
-                <figure>
-                    <img class="is-600px-width" alt='Burst' src='signum.svg'>
-                </figure>
-            </a>
-            <h2 class="subtitle is-uppercase is-size-2-tablet is-size-4-mobile center-text">
+            <h2 class="subtitle is-uppercase is-size-2-tablet is-size-4-mobile center-text has-text-white">
                 Buy me a beer 🍻
             </h2>
         </div>
@@ -56,10 +63,14 @@
     <figure>
         <img src="ohager_bat.png" alt="Signum Network Member ohager">
     </figure>
-    <h3>
-      <a class="has-text-white" href={`burst://requestBurst?receiver=${donationAccount}`}>{donationAccount}</a>
+    <h3 class="has-text-white is-clickable">
+        {donationAccount}
+        <span on:click={copyAddress} title="Copy Address">{hasCopied ? '✅' : '📋' }</span>
     </h3>
-    <button class="button" on:click={returnHome}>Back</button>
-    <button class={`button ${hasCopied && 'is-success'}`}
-            on:click={copyAddress}>{ hasCopied ? 'Address Copied': 'Copy Address'}</button>
+    <div class="is-flex is-flex-direction-column">
+      <a class="m-4" href={deeplink}>
+          <button class="button is-primary is-large">Donate</button>
+      </a>
+        <a class="has-text-white mt-2" href="/">Back</a>
+    </div>
 </section>

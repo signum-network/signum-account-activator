@@ -100,8 +100,8 @@
 
     .stamp-wrapper {
         position: absolute;
-        top: 0;
-        right: -2em;
+        top: 128px;
+        left: 256px;
     }
 
     .whitened {
@@ -120,15 +120,15 @@
         <div class='container'>
             {#if isTestnet}
                 <div class='stamp-wrapper'>
-                    <Stamp text='Testnet'></Stamp>
+                    <Stamp text='Testnet'/>
                 </div>
             {/if}
             <a href='https://signum.network/' target='_blank' rel='noopener'>
                 <figure>
-                    <img class='is-600px-width' alt='Signum Logo' src='signum.svg'>
+                    <img class='is-256px-height' alt='Signum Logo' src='signum.svg'>
                 </figure>
             </a>
-            <h1 class='subtitle is-uppercase is-size-2-tablet is-size-4-mobile'>
+            <h1 class='subtitle is-uppercase is-size-2-tablet is-size-4-mobile has-text-white'>
                 {title}
             </h1>
         </div>
@@ -138,9 +138,11 @@
 <section class='form'>
     {#if activationState === ActivationState.Activated}
         <div transition:fade class='success'>
-            <figure>
-                <img class='is-256px-height whitened' src='success.png' alt='Success' />
-            </figure>
+            <a href='https://signum.network/' target='_blank' rel='noopener'>
+                <figure>
+                    <img class='is-256px-height whitened' src='success.png' alt='Success' />
+                </figure>
+            </a>
             <small class="has-text-white">
                 A welcome message was sent to your account. You'll receive it in a few moments.
             </small>

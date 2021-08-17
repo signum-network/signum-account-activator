@@ -10,7 +10,7 @@ const logger = createLogger({
     host: 'listener.logz.io',
     port: '8071',
     type: 'nodejs',
-    extraFields: { app: 'burst-account-activator', dev },
+    extraFields: { app: 'signum-account-activator', dev },
 })
 
 function close() {

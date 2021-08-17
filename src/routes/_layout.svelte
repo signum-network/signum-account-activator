@@ -7,14 +7,14 @@
     :global(body) {
         height: 100%;
         margin: 0;
-        background-color: #1197d9;
+        background-color: #0066ff;
     }
 
     main {
         overflow-y: auto;
         position: relative;
         max-width: 56em;
-        background-color: #1197d9;
+        background-color: #0066ff;
         padding: 2em;
         margin: 0 auto;
         box-sizing: border-box;
