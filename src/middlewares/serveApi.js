@@ -10,9 +10,9 @@ const client = new Redis(config.redisUrl)
 const limiter = new RateLimit({
     store: new RedisStore({
         client,
-        resetExpiryOnChange: true,
-        passIfNotConnected: true,
     }),
+    resetExpiryOnChange: true,
+    passIfNotConnected: true,
     windowMs: 60 * 1000,
     max: 1,
     handler: function(req, res) {
@@ -26,7 +26,6 @@ const limiter = new RateLimit({
 export const serveApi = () => (req, res, next) => {
     if (isApiRequest(req)) {
         res.setHeader('Content-Type', 'application/json')
-
         if (req.method.toUpperCase() !== 'GET') {
             limiter(req, res, next)
             return

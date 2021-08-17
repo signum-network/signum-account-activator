@@ -36,7 +36,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express-rate-limit": "^5.0.0",
-    "ioredis": "^4.27.5",
+    "ioredis": "^4.27.7",
     "logzio-nodejs": "^2.0.2",
     "now-sapper": "^0.39.0",
     "polka": "next",
