@@ -1,5 +1,4 @@
-
-# Signum Account Activator
+# ![Powered By Signum](https://signum.network/assets/img/SignumLogoBlack.svg) Signum Account Activator
 
 This is a web application (and service) to activate new [Signum](https://signum.network/) accounts.
 
@@ -106,3 +105,5 @@ This project can be hosted on [Vercel](https://vercel.com/)
 3. Register the secret passphrase for the activator account using
    - testnet: `now secrets add activator-account-testnet "<passphrase>"`
    - mainnet: `now secrets add activator-account-mainnet "<passphrase>"`
+
+![Powered By Signum](https://blockplay.io/assets/powered.svg)
