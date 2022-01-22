@@ -14,7 +14,7 @@ const limiter = new RateLimit({
     resetExpiryOnChange: true,
     passIfNotConnected: true,
     windowMs: 60 * 1000,
-    max: 1,
+    max: 2,
     handler: function(req, res) {
         res.statusCode = 429
         res.end(
