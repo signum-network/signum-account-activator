@@ -4,8 +4,7 @@ import { config } from './config'
 const dev = process.env.NODE_ENV === 'development'
 
 const logger = createLogger({
-    // TODO: replace this by gh secrets once pipeline is up
-    token: 'tDejqmuSKonicGMRszNBwZYZGAvdHQRW',
+    token: config.logzIOApiKey,
     protocol: 'https',
     host: 'listener.logz.io',
     port: '8071',

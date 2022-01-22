@@ -15,5 +15,5 @@ export const config = {
     webUiAvailable: isTrue(process.env.WEB_UI),
     verboseLog: isTrue(process.env.VERBOSE_LOG),
     redisUrl: process.env.REDIS_URL,
-    logzToken: process.env.LOGZ_TOKEN,
+    logzIOApiKey: process.env.LOGZ_IO_SHIPPING_TOKEN,
 }
