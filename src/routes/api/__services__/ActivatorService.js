@@ -83,13 +83,13 @@ export class ActivatorService {
     }
 
     async __sendWelcomeMessage(accountId, publicKey) {
-        let { signPrivateKey, publicKey: senderPublicKey } = this.__getSenderCredentials()
-        let suggestedFees = await this.signumApi.network.getSuggestedFees()
+        const { signPrivateKey, publicKey: senderPublicKey } = this.__getSenderCredentials()
+        const feePlanck = Amount.fromSigna(config.activationFee).getPlanck()
         const sendMessageArgs = {
             message: WelcomeMessage,
+            feePlanck,
             recipientId: accountId,
             recipientPublicKey: publicKey,
-            feePlanck: suggestedFees.standard + '',
             senderPrivateKey: signPrivateKey,
             senderPublicKey: senderPublicKey,
         }
@@ -97,8 +97,8 @@ export class ActivatorService {
     }
 
     async __sendWelcomeMessageWithAmount(accountId, publicKey, amountPlanck) {
-        let { signPrivateKey, publicKey: senderPublicKey } = this.__getSenderCredentials()
-        let suggestedFees = Amount.fromSigna(config.activationFee)
+        const { signPrivateKey, publicKey: senderPublicKey } = this.__getSenderCredentials()
+        const feePlanck = Amount.fromSigna(config.activationFee).getPlanck()
         const attachment = new AttachmentMessage({
             messageIsText: true,
             message: WelcomeMessage,
@@ -107,7 +107,7 @@ export class ActivatorService {
         const args = {
             amountPlanck,
             attachment,
-            feePlanck: suggestedFees.standard + '',
+            feePlanck,
             recipientId: accountId,
             recipientPublicKey: publicKey,
             senderPrivateKey: signPrivateKey,
