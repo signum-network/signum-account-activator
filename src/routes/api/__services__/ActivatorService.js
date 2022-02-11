@@ -98,7 +98,7 @@ export class ActivatorService {
 
     async __sendWelcomeMessageWithAmount(accountId, publicKey, amountPlanck) {
         let { signPrivateKey, publicKey: senderPublicKey } = this.__getSenderCredentials()
-        let suggestedFees = await this.signumApi.network.getSuggestedFees()
+        let suggestedFees = Amount.fromSigna(config.activationFee)
         const attachment = new AttachmentMessage({
             messageIsText: true,
             message: WelcomeMessage,

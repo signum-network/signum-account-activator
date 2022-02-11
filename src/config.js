@@ -11,6 +11,7 @@ export const config = {
     donationAccount: process.env.DONATION_ACCOUNT,
     accountSecret: process.env.ACTIVATOR_ACCOUNT_SECRET,
     activationAmount: parseFloat(process.env.ACTIVATION_AMOUNT),
+    activationFee: parseFloat(process.env.ACTIVATION_FEE),
     isTestnet: isTrue(process.env.TEST_NET),
     webUiAvailable: isTrue(process.env.WEB_UI),
     verboseLog: isTrue(process.env.VERBOSE_LOG),
