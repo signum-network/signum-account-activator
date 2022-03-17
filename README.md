@@ -23,7 +23,7 @@ Doing so, the user does not need to create a transaction and the sending step ca
 
 [Testnet Activator UI](https://signum-account-activator-ohager.vercel.app)
 
-[Testnet Activator Web Service API](https://petstore.swagger.io/?url=https://burst-account-activator-testnet.now.sh/api/info)
+[Testnet Activator Web Service API](https://petstore.swagger.io/?url=https://signum-account-activator-ohager.vercel.app/api/info)
 
 ## Anatomy of passphrases
 
