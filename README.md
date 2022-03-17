@@ -16,7 +16,7 @@ Doing so, the user does not need to create a transaction and the sending step ca
 
 [Mainnet Activator UI](https://signum-account-activator.vercel.app/)
 
-[Mainnet Activator Web Service API](https://petstore.swagger.io/?url=https://signum-account-activator.now.sh/api/info)
+[Mainnet Activator Web Service API](https://petstore.swagger.io/?url=https://signum-account-activator.vercel.app/api/info)
 
 ## Test Net Links - Development
 ![Uptime Robot ratio (30 days)](https://img.shields.io/uptimerobot/ratio/m784377904-89a3979b61551238a7d96b5d?label=Uptime%20Testnet)
