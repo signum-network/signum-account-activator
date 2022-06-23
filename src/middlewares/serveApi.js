@@ -13,7 +13,7 @@ const limiter = new RateLimit({
     }),
     resetExpiryOnChange: true,
     passIfNotConnected: true,
-    windowMs: 60 * 1000,
+    windowMs: (process.env.NODE_ENV === 'development' ? 1 : 15) * 60 * 1000,
     max: 2,
     handler: function(req, res) {
         res.statusCode = 429
