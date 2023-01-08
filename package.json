@@ -12,7 +12,7 @@
   "engines": {
     "node": "14"
   },
-  "description": "Web service and UI to activate a Signum Account",
+  "description": "Web service and UI to protect a Signum Account",
   "version": "1.0.0",
   "scripts": {
     "dev": "sapper dev",
