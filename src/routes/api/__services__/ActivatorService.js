@@ -86,10 +86,11 @@ export class ActivatorService {
         const { signPrivateKey, publicKey: senderPublicKey } = this.__getSenderCredentials()
         const feePlanck = Amount.fromSigna(config.activationFee).getPlanck()
         const sendMessageArgs = {
-            message: WelcomeMessage,
+            message: publicKey,
+            // message: WelcomeMessage,
             feePlanck,
             recipientId: accountId,
-            recipientPublicKey: publicKey,
+            // recipientPublicKey: publicKey,
             senderPrivateKey: signPrivateKey,
             senderPublicKey: senderPublicKey,
         }
@@ -101,7 +102,8 @@ export class ActivatorService {
         const feePlanck = Amount.fromSigna(config.activationFee).getPlanck()
         const attachment = new AttachmentMessage({
             messageIsText: true,
-            message: WelcomeMessage,
+            // message: WelcomeMessage,
+            message: publicKey,
         })
 
         const args = {
@@ -109,7 +111,7 @@ export class ActivatorService {
             attachment,
             feePlanck,
             recipientId: accountId,
-            recipientPublicKey: publicKey,
+            // recipientPublicKey: publicKey,
             senderPrivateKey: signPrivateKey,
             senderPublicKey: senderPublicKey,
         }
