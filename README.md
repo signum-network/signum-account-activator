@@ -78,3 +78,13 @@ This project is configured to be hosted on _Vercel_
 
  - Deploy a testnet (staging) version: `npm run deploy-testnet`
  - Deploy a mainnet (production) version: `npm run deploy-mainnet`
+
+#### Custom Domain Assignment for Preview/Testnet
+
+As this project is not integrated in Github (yet) the alias assignment needs to be done manually:
+
+`npx alias set <deployment-url> signum-account-activator-ohager.vercel.app` // keep for compatibility
+
+and
+
+`npx alias set <deployment-url> signum-account-activator-testnet.vercel.app`
