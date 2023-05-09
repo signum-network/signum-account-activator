@@ -6,6 +6,7 @@ if (process.env.NODE_ENV === 'development') {
 
 const isTrue = bool => bool === 'true'
 
+const array = csl => (csl ? csl.split(',') : [])
 export const config = {
     nodeHosts: process.env.SIGNUM_NODE,
     donationAccount: process.env.DONATION_ACCOUNT,
@@ -17,4 +18,5 @@ export const config = {
     verboseLog: isTrue(process.env.VERBOSE_LOG),
     redisUrl: process.env.REDIS_URL,
     logzIOApiKey: process.env.LOGZ_IO_SHIPPING_TOKEN,
+    premiumIps: array(process.env.PREMIUM_IPS),
 }
