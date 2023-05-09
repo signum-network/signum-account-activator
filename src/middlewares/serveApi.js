@@ -43,9 +43,8 @@ const premiumLimiter = new RateLimit({
 export const serveApi = () => (req, res, next) => {
     if (isApiRequest(req)) {
         res.setHeader('Content-Type', 'application/json')
-        const ip = extractIpFromRequest(req)
         if (req.method.toUpperCase() !== 'GET') {
-            if (config.premiumIps.includes(ip)) {
+            if (req.headers["x-api-key"] === process.env.PREMIUM_KEY) {
                 premiumLimiter(req, res, next)
             } else {
                 limiter(req, res, next)
