@@ -4,13 +4,13 @@
     "email": "development@signum.network",
     "name": "Signum Development "
   },
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "repository": {
     "type": "github",
     "url": "https://github.com/signum-network/signum-account-activator"
   },
   "engines": {
-    "node": "14"
+    "node": ">14"
   },
   "description": "Web service and UI to protect a Signum Account",
   "version": "1.0.0",
