@@ -85,6 +85,7 @@ export class ActivatorService {
     async __sendWelcomeMessage(accountId, publicKey) {
         const { signPrivateKey, publicKey: senderPublicKey } = this.__getSenderCredentials()
         const feePlanck = Amount.fromSigna(config.activationFee).getPlanck()
+        // FIXME: once 3.7 is live
         const sendMessageArgs = {
             message: publicKey,
             // message: WelcomeMessage,

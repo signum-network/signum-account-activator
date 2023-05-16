@@ -10,7 +10,7 @@
     "url": "https://github.com/signum-network/signum-account-activator"
   },
   "engines": {
-    "node": ">14"
+    "node": "14"
   },
   "description": "Web service and UI to protect a Signum Account",
   "version": "1.0.0",
