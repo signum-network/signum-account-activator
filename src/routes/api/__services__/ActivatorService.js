@@ -5,7 +5,7 @@ import { config } from '../../../config'
 import { Logger } from '../../../logger'
 
 const WelcomeMessage =
-    'Welcome to the Signum Network. The truly decentralized, public, and sustainable blockchain platform'
+    'Welcome to the Signum Network.👋 A truly decentralized, public, and sustainable blockchain platform. Have a look at https://docs.signum.network/ecosystem to find out more.'
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = config.isTestnet ? '0' : '1'
 
@@ -103,7 +103,6 @@ export class ActivatorService {
         const attachment = new AttachmentMessage({
             messageIsText: true,
             message: WelcomeMessage,
-            message: publicKey,
         })
 
         const args = {
