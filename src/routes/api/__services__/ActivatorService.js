@@ -86,7 +86,6 @@ export class ActivatorService {
         const { signPrivateKey, publicKey: senderPublicKey } = this.__getSenderCredentials()
         const feePlanck = Amount.fromSigna(config.activationFee).getPlanck()
         const sendMessageArgs = {
-            message: publicKey,
             message: WelcomeMessage,
             feePlanck,
             recipientId: accountId,
