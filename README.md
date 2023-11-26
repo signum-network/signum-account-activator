@@ -88,4 +88,6 @@ As this project is not integrated in Github (yet) the alias assignment needs to 
 and
 
 `npx vercel alias set <deployment-url> signum-account-activator-testnet.vercel.app`
-`npx vercel alias set <deployment-url> signum-account-activator-ohager.vercel.app`
+`npx vercel alias set <deployment-url> signum-account-activator-testnet.vercel.app`
+
+`npx vercel alias set signum-account-activator-gyv1a5ytd-ohager.vercel.app signum-account-activator-ohager.vercel.app`

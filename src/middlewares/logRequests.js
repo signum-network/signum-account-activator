@@ -2,10 +2,10 @@ import { Logger } from '../logger'
 import { extractIpFromRequest } from './__helpers__/extractIpFromRequest'
 
 export const logRequests = () => {
-    return function(req, res, next) {
+    return async function(req, res, next) {
         const { body, method, url, headers } = req
         const ip = extractIpFromRequest(req)
-        Logger.log(
+        await Logger.log(
             {
                 headers,
                 ip,

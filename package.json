@@ -10,26 +10,29 @@
     "url": "https://github.com/signum-network/signum-account-activator"
   },
   "engines": {
-    "node": "16"
+    "node": ">=16"
   },
   "description": "Web service and UI to protect a Signum Account",
   "version": "1.0.0",
   "scripts": {
-    "dev": "sapper dev",
+    "dev": "NODE_OPTIONS=--openssl-legacy-provider sapper dev",
     "export": "sapper export",
     "build": "sapper build",
     "compile": "sapper build",
-    "start": "node __sapper__/build",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider node __sapper__/build",
     "test": "jest",
     "init": "./scripts/init.sh",
     "deploy-testnet": "npx vercel",
     "deploy-mainnet": "npx vercel --prod"
   },
   "dependencies": {
+    "@axiomhq/pino": "^1.0.0-rc.1",
+    "@axiomhq/winston": "^1.0.0-rc.1",
     "@signumjs/core": "^1.0.0-rc.4",
+    "@signumjs/crypto": "^1.0.0-rc.4",
     "@signumjs/http": "^1.0.0-rc.4",
     "@signumjs/util": "^1.0.0-rc.4",
-    "@signumjs/crypto": "^1.0.0-rc.4",
+    "add": "^2.0.6",
     "body-parser": "1.19.1",
     "bulma": "^0.8.2",
     "compression": "^1.7.4",
@@ -39,9 +42,12 @@
     "ioredis": "^4.27.7",
     "logzio-nodejs": "^2.0.2",
     "now-sapper": "^0.39.0",
+    "pino": "^8.16.2",
     "polka": "next",
     "rate-limit-redis": "^2.1.0",
-    "sirv": "^0.4.2"
+    "remove": "^0.1.5",
+    "sirv": "^0.4.2",
+    "winston": "^3.11.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",

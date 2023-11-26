@@ -38,14 +38,14 @@ export class ActivatorService {
         }
     }
 
-    __validateAddressKeyPair(accountId, publicKey) {
+    async __validateAddressKeyPair(accountId, publicKey) {
         const verifiedAccountId = getAccountIdFromPublicKey(publicKey)
         if (verifiedAccountId !== accountId) {
             throw new Error('Account Id does not match Public Key')
         }
     }
 
-    __getSenderCredentials() {
+    async __getSenderCredentials() {
         const keys = generateMasterKeys(config.accountSecret)
         return {
             id: getAccountIdFromPublicKey(keys.publicKey),
@@ -118,7 +118,7 @@ export class ActivatorService {
 
     async activate(account, publicKey) {
         const accountId = Address.create(account).getNumericId()
-        this.__validateAddressKeyPair(accountId, publicKey)
+        await this.__validateAddressKeyPair(accountId, publicKey)
         await this.__validateAccount(accountId)
         await this.__validatePendingActivation(accountId)
         if (config.activationAmount === 0) {

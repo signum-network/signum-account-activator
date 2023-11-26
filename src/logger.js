@@ -1,28 +1,31 @@
-import { createLogger } from 'logzio-nodejs'
 import { config } from './config'
+import winston from 'winston'
+import { WinstonTransport as AxiomTransport } from '@axiomhq/winston'
 
 const dev = process.env.NODE_ENV === 'development'
-
-const logger = createLogger({
-    token: config.logzIOApiKey,
-    protocol: 'https',
-    host: 'listener.logz.io',
-    port: '8071',
-    type: 'nodejs',
-    extraFields: { app: 'signum-account-activator', dev },
+const logger = winston.createLogger({
+    level: 'info',
+    format: winston.format.json(),
+    defaultMeta: { service: 'signum-activation-service' },
+    transports: [
+        new AxiomTransport({
+            token: process.env.AXIOM_TOKEN || '',
+            dataset: process.env.AXIOM_DATASET,
+        }),
+    ],
 })
 
-function close() {
-    logger.sendAndClose()
+// Add the console logger if we're not in production
+if (dev) {
+    logger.add(
+        new winston.transports.Console({
+            format: winston.format.simple(),
+        }),
+    )
 }
 
 function log(obj, flush = false) {
-    if (dev) {
-        console.log('[DEV] - ', JSON.stringify(obj))
-    }
-
     logger.log(obj)
-    flush && close()
 }
 
 function verbose(obj) {
@@ -41,8 +44,13 @@ function logError(errmsg, obj) {
     )
 }
 
+function close() {
+    return new Promise(resolve => logger.end(resolve))
+}
+
 export const Logger = {
     logError,
     log,
     verbose,
+    close,
 }
