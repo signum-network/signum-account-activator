@@ -9,16 +9,16 @@ const app = polka()
 
 const maskedConfig = {
     ...config,
-    accountSecret: config.accountSecret.substr(0, 4) + '*****',
+    accountSecret: '*****',
 }
 
 Logger.log(maskedConfig)
 
 app.use(...middlewares).listen(PORT, async err => {
     if (err) {
-      Logger.logError(err)
+        Logger.logError(err)
     }
-    await Logger.close()
+    // await Logger.close()
 })
 
 export default app.handler

@@ -16,32 +16,39 @@ const logger = winston.createLogger({
 })
 
 // Add the console logger if we're not in production
-if (dev) {
-    logger.add(
-        new winston.transports.Console({
-            format: winston.format.simple(),
-        }),
-    )
-}
+// if (dev) {
+//     logger.add(
+//         new winston.transports.Console({
+//             level: 'debug',
+//             format: winston.format.simple(),
+//         }),
+//     )
+// }
 
 function log(obj, flush = false) {
-    logger.log(obj)
+    logger.log({
+        level: 'info',
+        message: obj.msg || '',
+        ...obj,
+    })
 }
 
 function verbose(obj) {
     if (config.verboseLog) {
-        log(obj)
+        logger.log({
+            level: 'verbose',
+            message: obj.msg || '',
+            ...obj,
+        })
     }
 }
 
 function logError(errmsg, obj) {
-    log(
-        {
-            ...obj,
-            errmsg,
-        },
-        true,
-    )
+    logger.log({
+        level: 'error',
+        message: errmsg || 'Unexpected Error',
+        ...obj,
+    })
 }
 
 function close() {

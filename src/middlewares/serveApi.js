@@ -36,15 +36,16 @@ const getLimiter = () => {
 export const serveApi = () => (req, res, next) => {
     if (isApiRequest(req)) {
         res.setHeader('Content-Type', 'application/json')
-        if (req.method.toUpperCase() !== 'GET') {
-            if (req.headers['x-api-key'] === process.env.PREMIUM_KEY) {
-                next()
-            } else {
-                const limiter = getLimiter()
-                limiter(req, res, next)
-            }
-            return
-        }
+
+        // if (req.method.toUpperCase() !== 'GET') {
+        //     if (req.headers['x-api-key'] === process.env.PREMIUM_KEY) {
+        //         next()
+        //     } else {
+        //         const limiter = getLimiter()
+        //         limiter(req, res, next)
+        //     }
+        //     return
+        // }
     }
     next()
 }

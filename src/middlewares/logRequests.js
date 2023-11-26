@@ -5,7 +5,7 @@ export const logRequests = () => {
     return async function(req, res, next) {
         const { body, method, url, headers } = req
         const ip = extractIpFromRequest(req)
-        await Logger.log(
+        Logger.log(
             {
                 headers,
                 ip,
