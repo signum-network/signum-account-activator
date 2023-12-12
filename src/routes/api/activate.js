@@ -16,6 +16,8 @@ export const post = async (req, res) => {
             const msg = 'Field [account] is not a valid Signum address.'
             Logger.logError(msg, { status: 400 })
             res.end(messageResponse(msg))
+        } finally {
+            await Logger.flush()
         }
     }
 
@@ -23,23 +25,23 @@ export const post = async (req, res) => {
         try {
             await activatorService.activate(account, publickey)
             res.statusCode = 204
-            Logger.log(
-                {
-                    success: true,
-                    ...req.body,
-                },
-                true,
-            )
+            Logger.log({
+                success: true,
+                ...req.body,
+            })
             res.end()
         } catch (e) {
             res.statusCode = 400
             Logger.logError(e.message, { status: 400 })
             res.end(messageResponse(e.message))
+        } finally {
+            await Logger.flush()
         }
     } else {
         res.statusCode = 400
         const msg = 'Missing fields [account] and/or [publickey]'
         Logger.logError(msg, { status: 400 })
+        await Logger.flush();
         res.end(messageResponse(msg))
     }
 }

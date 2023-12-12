@@ -13,7 +13,7 @@ const dev = process.env.NODE_ENV === 'development'
 export const middlewares = [
     cors(),
     compression({ threshold: 0 }),
-    // serveApi(),
+    serveApi(),
     json(),
     sirv('static', { dev }),
     logRequests(),

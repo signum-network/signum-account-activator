@@ -1,33 +1,16 @@
-import { config } from './config'
-import winston from 'winston'
-import { WinstonTransport as AxiomTransport } from '@axiomhq/winston'
+import { Logger as InternalAxiomLogger } from 'next-axiom'
+// eslint-disable-next-line
+import { config } from "./config";
 
-const dev = process.env.NODE_ENV === 'development'
-const logger = winston.createLogger({
-    level: 'info',
-    format: winston.format.json(),
-    defaultMeta: { service: 'signum-activation-service' },
-    transports: [
-        new AxiomTransport({
-            token: process.env.AXIOM_TOKEN || '',
-            dataset: process.env.AXIOM_DATASET,
-        }),
-    ],
+
+const logger = new InternalAxiomLogger({
+    source: 'signum-activation-service',
+    autoFlush: true,
 })
+console.debug('Axiom Logger initialized')
 
-// Add the console logger if we're not in production
-// if (dev) {
-//     logger.add(
-//         new winston.transports.Console({
-//             level: 'debug',
-//             format: winston.format.simple(),
-//         }),
-//     )
-// }
-
-function log(obj, flush = false) {
-    logger.log({
-        level: 'info',
+function log(obj) {
+    logger.info({
         message: obj.msg || '',
         ...obj,
     })
@@ -35,8 +18,7 @@ function log(obj, flush = false) {
 
 function verbose(obj) {
     if (config.verboseLog) {
-        logger.log({
-            level: 'verbose',
+        logger.debug({
             message: obj.msg || '',
             ...obj,
         })
@@ -44,20 +26,19 @@ function verbose(obj) {
 }
 
 function logError(errmsg, obj) {
-    logger.log({
-        level: 'error',
+    logger.error({
         message: errmsg || 'Unexpected Error',
         ...obj,
     })
 }
 
-function close() {
-    return new Promise(resolve => logger.end(resolve))
+function flush() {
+    return logger.flush()
 }
 
 export const Logger = {
     logError,
     log,
     verbose,
-    close,
+    flush,
 }
